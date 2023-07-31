@@ -1,13 +1,12 @@
-<script setup lang="ts">
-import type { ICall } from "@src/types";
+<script setup>
 import Call from "@src/components/views/HomeView/Sidebar/Calls/Call.vue";
 
-const props = defineProps<{
-  calls: ICall[];
-  chatStatus: string;
-  delayLoading: string;
-  openInfoModal: (call: ICall) => void;
-}>();
+const props = defineProps({
+  calls:{default:undefined},
+  chatStatus: String,
+  delayLoading: String,
+  openInfoModal: Function
+});
 </script>
 
 <template>

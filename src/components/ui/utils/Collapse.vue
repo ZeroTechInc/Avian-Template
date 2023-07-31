@@ -1,9 +1,9 @@
-<script setup lang="ts">
+<script setup>
 import CollapseTransition from "@src/components/ui/transitions/CollapseTransition.vue";
 
-const props = defineProps<{
-  collapsed: boolean;
-}>();
+const props = defineProps({
+  collapsed: Boolean,
+});
 </script>
 
 <template>

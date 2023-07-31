@@ -1,12 +1,4 @@
-<script setup lang="ts">
-import type {
-  IConversation,
-  IMessage,
-  IPreviewData,
-  IRecording,
-} from "@src/types";
-import type { Ref } from "vue";
-
+<script setup>
 import linkifyStr from "linkify-string";
 import { inject, ref } from "vue";
 
@@ -20,27 +12,27 @@ import Recording from "@src/components/views/HomeView/Chat/ChatMiddle/Message/Re
 import MessagePreview from "@src/components/views/HomeView/Chat/MessagePreview.vue";
 import Receipt from "@src/components/views/HomeView/Chat/ChatMiddle/Message/Receipt.vue";
 
-const props = defineProps<{
-  message: IMessage;
-  followUp: boolean;
-  self: boolean;
-  divider?: boolean;
-  selected?: boolean;
-  handleSelectMessage: (messageId: number) => void;
-  handleDeselectMessage: (messageId: number) => void;
-}>();
+const props = defineProps({
+  message:{default:undefined},
+  followUp: Boolean,
+  self: Boolean,
+  divider:{type:Boolean,default:undefined},
+  selected:{type:Boolean,default:undefined},
+  handleSelectMessage: Function,
+  handleDeselectMessage: Function,
+});
 
-const activeConversation = <IConversation>inject("activeConversation");
+const activeConversation = inject("activeConversation");
 
 const showContextMenu = ref(false);
 
-const contextMenuCoordinations: Ref<{ x: number; y: number }> = ref({
+const contextMenuCoordinations = ref({
   x: 0,
   y: 0,
 });
 
 // open context menu.
-const handleShowContextMenu = (event: any) => {
+const handleShowContextMenu = (event) => {
   showContextMenu.value = true;
   contextMenuCoordinations.value = {
     x:
@@ -135,7 +127,7 @@ const replyMessage = getMessageById(activeConversation, props.message.replyTo);
             noColor
             v-if="props.message.content && props.message.type !== 'recording'"
             class="outline-none text-black opacity-60 dark:text-white dark:opacity-70"
-            v-html="linkifyStr((props.message.content as string), {
+            v-html="linkifyStr((props.message.content), {
                             className: props.self ? 'text-black opacity-50' : 'text-indigo-500 dark:text-indigo-300',
                             format: { url: (value) => value.length > 50 ? value.slice(0, 50) + `…` : value }
                         })"
@@ -150,14 +142,14 @@ const replyMessage = getMessageById(activeConversation, props.message.replyTo);
             "
           >
             <Recording
-              :recording="(props.message.content as IRecording)"
+              :recording="(props.message.content)"
               :self="props.self"
             />
           </div>
 
           <!--attachments-->
           <Attachments
-            v-if="(props.message.attachments as [])?.length > 0"
+            v-if="(props.message.attachments)?.length > 0"
             :message="props.message"
             :self="props.self"
           />
@@ -166,7 +158,7 @@ const replyMessage = getMessageById(activeConversation, props.message.replyTo);
           <LinkPreview
             v-if="props.message.previewData && !props.message.attachments"
             :self="props.self"
-            :preview-data="(props.message.previewData as IPreviewData)"
+            :preview-data="(props.message.previewData)"
             class="mt-5"
           />
         </div>

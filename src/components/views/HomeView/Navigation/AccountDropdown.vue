@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
 import useStore from "@src/store/store";
 
 import {
@@ -10,20 +10,20 @@ import Dropdown from "@src/components/ui/navigation/Dropdown/Dropdown.vue";
 import DropdownLink from "@src/components/ui/navigation/Dropdown/DropdownLink.vue";
 import { RouterLink } from "vue-router";
 
-const props = defineProps<{
-  showDropdown: boolean;
-  handleCloseDropdown: () => void;
-  handleShowDropdown: () => void;
-  id: string;
-}>();
+const props = defineProps({
+  showDropdown: Boolean,
+  handleCloseDropdown: Function,
+  handleShowDropdown: Function,
+  id: String,
+});
 
 const store = useStore();
 
 // (event) close dropdown menu when clicking outside
-const handleCloseOnClickOutside = (event: Event) => {
+const handleCloseOnClickOutside = (event) => {
   if (
     !["user-avatar", "profile-menu-button"].includes(
-      (event.target as HTMLButtonElement).id
+      (event.target).id
     )
   ) {
     props.handleCloseDropdown();

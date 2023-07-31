@@ -1,11 +1,10 @@
-<script setup lang="ts">
-import type { IMessage } from "@src/types";
+<script setup>
 import { getFullName } from "@src/utils";
 import Typography from "@src/components/ui/data-display/Typography.vue";
 
-const props = defineProps<{
-  message: IMessage;
-}>();
+const props = defineProps({
+  message:{default:undefined},
+});
 </script>
 
 <template>

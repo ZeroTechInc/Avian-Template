@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
 import useStore from "@src/store/store";
 
 import AccordionButton from "@src/components/ui/data-display/AccordionButton.vue";
@@ -7,10 +7,10 @@ import Collapse from "@src/components/ui/utils/Collapse.vue";
 import SettingsSwitch from "@src/components/views/HomeView/Sidebar/Settings/SettingsAccordion/SettingsSwitch.vue";
 
 // Variables
-const props = defineProps<{
-  collapsed: boolean;
-  handleToggle: () => void;
-}>();
+const props = defineProps({
+  collapsed: Boolean,
+  handleToggle: Function,
+});
 
 const store = useStore();
 </script>
@@ -34,7 +34,7 @@ const store = useStore();
       title="Show Last Seen"
       description="Allow people to see your last login"
       :value="!!store.settings.lastSeen"
-      :handle-toggle-switch="(value:boolean) => (store.settings.lastSeen = value)"
+      :handle-toggle-switch="(value) => (store.settings.lastSeen = value)"
       class="mb-7"
     />
     <SettingsSwitch
@@ -42,7 +42,7 @@ const store = useStore();
       description="Allow people to see whether or not you've read the message"
       :value="!!store.settings.readReceipt"
       :handle-toggle-switch="
-        (value:boolean) => (store.settings.readReceipt = value)
+        (value) => (store.settings.readReceipt = value)
       "
       class="mb-7"
     />
@@ -51,7 +51,7 @@ const store = useStore();
       description="Allow people to add you to groups"
       :value="!!store.settings.joiningGroups"
       :handle-toggle-switch="
-        (value:boolean) => (store.settings.joiningGroups = value)
+        (value) => (store.settings.joiningGroups = value)
       "
       class="mb-7"
     />
@@ -60,7 +60,7 @@ const store = useStore();
       description="Receive messages from non-contacts"
       :value="!!store.settings.privateMessages"
       :handle-toggle-switch="
-        (value:boolean) => (store.settings.privateMessages = value)
+        (value) => (store.settings.privateMessages = value)
       "
       class="mb-7"
     />

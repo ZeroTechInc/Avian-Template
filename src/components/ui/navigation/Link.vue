@@ -1,11 +1,11 @@
-<script setup lang="ts">
+<script setup>
 import Typography from "@src/components/ui/data-display/Typography.vue";
 
-const props = defineProps<{
-  variant?: string;
-  noColor?: boolean;
-  href: string;
-}>();
+const props = defineProps({
+  variant:{type:String,default:''},
+  noColor:{type:Boolean,default:undefined},
+  href: String,
+});
 </script>
 
 <template>

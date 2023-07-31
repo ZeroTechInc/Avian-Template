@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
 import { computed, ref } from "vue";
 import { RouterLink } from "vue-router";
 
@@ -25,10 +25,7 @@ const ActiveSection = computed(() => {
 });
 
 // (event) to move between modal pages
-const changeActiveSection = (event: {
-  sectionName: string;
-  animationName: string;
-}) => {
+const changeActiveSection = (event) => {
   animation.value = event.animationName;
   activeSectionName.value = event.sectionName;
 };

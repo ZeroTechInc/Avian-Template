@@ -1,11 +1,11 @@
-<script setup lang="ts">
+<script setup>
 import { ArchiveBoxIcon, XMarkIcon } from "@heroicons/vue/24/outline";
 import Typography from "@src/components/ui/data-display/Typography.vue";
 import useStore from "@src/store/store";
 
-const props = defineProps<{
-  open: boolean;
-}>();
+const props = defineProps({
+  open: Boolean,
+});
 
 const store = useStore();
 </script>

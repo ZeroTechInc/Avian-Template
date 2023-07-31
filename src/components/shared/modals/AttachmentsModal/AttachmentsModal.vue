@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
 import { attachments } from "@src/store/defaults";
 
 import Attachment from "@src/components/shared/modals/AttachmentsModal/Attachment.vue";
@@ -7,10 +7,10 @@ import TextInput from "@src/components/ui/inputs/TextInput.vue";
 import Modal from "@src/components/ui/utils/Modal.vue";
 import ScrollBox from "@src/components/ui/utils/ScrollBox.vue";
 
-const props = defineProps<{
-  open: boolean;
-  closeModal: () => void;
-}>();
+const props = defineProps({
+  open: Boolean,
+  closeModal: Function,
+});
 </script>
 
 <template>

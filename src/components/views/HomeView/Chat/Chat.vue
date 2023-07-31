@@ -1,6 +1,4 @@
-<script setup lang="ts">
-import type { Ref } from "vue";
-
+<script setup>
 import { computed, provide, ref } from "vue";
 import useStore from "@src/store/store";
 
@@ -35,10 +33,10 @@ const selectMode = ref(false);
 const selectAll = ref(false);
 
 // holds the selected conversations.
-const selectedMessages: Ref<number[]> = ref([]);
+const selectedMessages = ref([]);
 
 // (event) add message to select messages.
-const handleSelectMessage = (messageId: number) => {
+const handleSelectMessage = (messageId) => {
   selectedMessages.value.push(messageId);
 
   if (
@@ -54,7 +52,7 @@ const handleSelectMessage = (messageId: number) => {
 };
 
 // (event) remove message from select messages.
-const handleDeselectMessage = (messageId: number) => {
+const handleDeselectMessage = (messageId) => {
   selectAll.value = false;
   selectedMessages.value = selectedMessages.value.filter(
     (item) => item !== messageId

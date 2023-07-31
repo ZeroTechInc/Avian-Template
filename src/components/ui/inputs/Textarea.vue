@@ -1,21 +1,19 @@
-<script setup lang="ts">
-import type { Ref } from "vue";
-
+<script setup>
 import { twMerge } from "tailwind-merge";
 import { computed, ref } from "vue";
 
-const props = defineProps<{
-  class: any;
-  variant?: string;
-  value?: string;
-  autoResize?: boolean;
-}>();
+const props = defineProps({
+  class:{default:undefined},
+  variant:{type:String,default:''},
+  value:{type:String,default:''},
+  autoResize:{type:Boolean,default:undefined},
+});
 
-const textarea: Ref<HTMLTextAreaElement | null> = ref(null);
+const textarea = ref(null);
 
 const baseClasses = `max-w-full w-full px-5 py-4 rounded-sm content-center outline-none text-sm
-        placeholder:text-black placeholder:opacity-40 text-opacity-70 dark:placeholder:text-white 
-        dark:placeholder:opacity-70 focus:outline-none transition duration-200 
+        placeholder:text-black placeholder:opacity-40 text-opacity-70 dark:placeholder:text-white
+        dark:placeholder:opacity-70 focus:outline-none transition duration-200
         ease-out`;
 
 const variantClasses = computed(() => {
@@ -24,7 +22,7 @@ const variantClasses = computed(() => {
             dark:text-white dark:bg-opacity-70 dark:focus:bg-opacity-0 focus:bg-opacity-0
             focus:border-indigo-300 dark:border-gray-600`;
   } else {
-    return `text-black bg-gray-50 dark:text-white border-opacity-0 
+    return `text-black bg-gray-50 dark:text-white border-opacity-0
             dark:bg-gray-700 dark:bg-opacity-70 dark:border-opacity-70 dark:border-gray-700`;
   }
 });
@@ -44,6 +42,6 @@ const handleAutoResize = () => {
     :class="classes"
     ref="textarea"
     :value="props.value"
-    @input="$event =>{handleAutoResize(); $emit('update:modelValue', ($event.target as HTMLInputElement).value)}"
+    @input="$event =>{handleAutoResize(); $emit('update:modelValue', ($event.target).value)}"
   ></textarea>
 </template>

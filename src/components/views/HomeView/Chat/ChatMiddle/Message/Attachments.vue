@@ -1,25 +1,22 @@
-<script setup lang="ts">
+<script setup>
 import { ArrowDownTrayIcon } from "@heroicons/vue/24/outline";
 import { PlayIcon } from "@heroicons/vue/24/solid";
-import type { Ref } from "vue";
 import { computed, ref } from "vue";
-
-import type { IAttachment, IMessage } from "@src/types";
 
 import Carousel from "@src/components/ui/data-display/Carousel/Carousel.vue";
 import Typography from "@src/components/ui/data-display/Typography.vue";
 
-const props = defineProps<{
-  message: IMessage;
-  self?: boolean;
-}>();
+const props = defineProps({
+  message:{default:undefined},
+  self:{type:Boolean,default:undefined}
+});
 
-const openCarousel: Ref<boolean> = ref(false);
+const openCarousel = ref(false);
 
-const selectedAttachmentId: Ref<number | undefined> = ref();
+const selectedAttachmentId = ref();
 
 // open the carousel with the selected index
-const openCarouselWithAttachment = (attachmentId: number) => {
+const openCarouselWithAttachment = (attachmentId) => {
   selectedAttachmentId.value = attachmentId;
   openCarousel.value = true;
 };
@@ -56,9 +53,9 @@ const numberOfMedia = computed(() => {
 
 // (event) test is the attachment is the second media item.
 const isNumber = (
-  attachment: IAttachment,
-  number: number,
-  largerThan?: boolean
+  attachment,
+  number,
+  largerThan
 ) => {
   let counter = 0;
   let caseCorrect = false;
@@ -99,7 +96,7 @@ const isNumber = (
           v-if="attachment.type === 'image'"
           @click="openCarouselWithAttachment(attachment.id)"
           class="outline-none"
-          :aria-label="numberOfMedia > 2 ? (props.message.attachments as []).length - 1 + ' more attachments' : attachment.name"
+          :aria-label="numberOfMedia > 2 ? (props.message.attachments).length - 1 + ' more attachments' : attachment.name"
         >
           <div
             v-if="!isNumber(attachment, 2, true)"
@@ -127,7 +124,7 @@ const isNumber = (
               v-if="isNumber(attachment, 2) && numberOfMedia > 2"
               class="w-full h-full flex items-center justify-center rounded bg-black bg-opacity-40 text-white hover:bg-opacity-10 transition duration-200"
             >
-              {{ (props.message.attachments as []).length - 1 }}+
+              {{ (props.message.attachments).length - 1 }}+
             </div>
           </div>
         </button>
@@ -137,7 +134,7 @@ const isNumber = (
           v-if="attachment.type === 'video'"
           @click="openCarouselWithAttachment(attachment.id)"
           class="overflow-hidden outline-none"
-          :aria-label="numberOfMedia > 2 ? (props.message.attachments as []).length - 1 + ' more attachments' : attachment.name"
+          :aria-label="numberOfMedia > 2 ? (props.message.attachments).length - 1 + ' more attachments' : attachment.name"
         >
           <div
             v-if="!isNumber(attachment, 2, true)"
@@ -183,7 +180,7 @@ const isNumber = (
               v-else-if="isNumber(attachment, 2) && numberOfMedia > 2"
               class="w-full h-full flex items-center justify-center rounded bg-black bg-opacity-40 text-white hover:bg-opacity-10 transition duration-200"
             >
-              {{ (props.message.attachments as []).length - 1 }}+
+              {{ (props.message.attachments).length - 1 }}+
             </div>
           </div>
         </button>
@@ -262,7 +259,7 @@ const isNumber = (
       <!--carousel modal-->
       <Carousel
         :open="openCarousel"
-        :starting-id="(selectedAttachmentId as number)"
+        :starting-id="(selectedAttachmentId)"
         :close-carousel="closeCarousel"
       />
     </div>

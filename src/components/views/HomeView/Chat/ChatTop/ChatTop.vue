@@ -1,6 +1,4 @@
-<script setup lang="ts">
-import type { IConversation } from "@src/types";
-
+<script setup>
 import useStore from "@src/store/store";
 import { inject, ref, computed } from "vue";
 
@@ -12,17 +10,17 @@ import FadeTransition from "@src/components/ui/transitions/FadeTransition.vue";
 import ConversationInfoSection from "./ConversationInfoSection.vue";
 import SelectSection from "./SelectSection.vue";
 
-const props = defineProps<{
-  selectMode: boolean;
-  selectAll: boolean;
-  handleSelectAll: () => void;
-  handleDeselectAll: () => void;
-  handleCloseSelect: () => void;
-}>();
+const props = defineProps({
+  selectMode: Boolean,
+  selectAll: Boolean,
+  handleSelectAll: Function,
+  handleDeselectAll: Function,
+  handleCloseSelect: Function,
+});
 
 const store = useStore();
 
-const activeConversation = <IConversation>inject("activeConversation");
+const activeConversation = inject("activeConversation");
 
 const openSearch = ref(false);
 
@@ -39,7 +37,7 @@ const handleOpenInfo = () => {
 };
 
 // (event) close the voice call modal and minimize the call
-const handleCloseVoiceCallModal = (endCall: boolean) => {
+const handleCloseVoiceCallModal = (endCall) => {
   if (endCall) {
     store.activeCall = undefined;
     store.callMinimized = false;

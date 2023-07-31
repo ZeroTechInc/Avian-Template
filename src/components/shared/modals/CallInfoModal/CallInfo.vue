@@ -1,7 +1,5 @@
-<script setup lang="ts">
+<script setup>
 import { computed } from "vue";
-
-import type { ICall } from "@src/types";
 
 import {
   CalendarIcon,
@@ -14,10 +12,10 @@ import InfoItem from "@src/components/shared/blocks/InfoItem.vue";
 import Typography from "@src/components/ui/data-display/Typography.vue";
 import Button from "@src/components/ui/inputs/Button.vue";
 
-const props = defineProps<{
-  call: ICall;
-  closeModal: () => void;
-}>();
+const props = defineProps({
+  call:{default:undefined},
+  closeModal: Function,
+});
 
 const CallStatusIcon = computed(() => {
   if (props.call) {

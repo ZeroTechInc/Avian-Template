@@ -1,28 +1,23 @@
-<script setup lang="ts">
+<script setup>
 import { onClickOutside } from "@vueuse/core";
 import { onMounted, onUnmounted, ref } from "vue";
 
 import ScaleTransition from "@src/components/ui/transitions/ScaleTransition.vue";
 
-const props = defineProps<{
-  show: boolean;
-  handleClickOutside: any;
-  preventClickOutside?: boolean;
-  coordinates?: {
-    left?: string;
-    right?: string;
-    top?: string;
-    bottom?: string;
-  };
-  position: string[];
-  closeDropdown: () => void;
-}>();
+const props = defineProps({
+  show: Boolean,
+  handleClickOutside:{default:undefined},
+  preventClickOutside:{type:Boolean,default:undefined},
+  coordinates:{default:undefined},
+  position:{default:undefined},
+  closeDropdown: Function,
+});
 
 // html element containing the dropdown.
 const dropdown = ref();
 
 // (event) close dropdown when typing esc button.
-const handleCloseOnEscape = (event: KeyboardEvent) => {
+const handleCloseOnEscape = (event) => {
   if (["Escape", "Esc"].includes(event.key)) {
     props.closeDropdown();
   }

@@ -1,6 +1,4 @@
-<script setup lang="ts">
-import type { IAttachment } from "@src/types";
-
+<script setup>
 import {
   ArrowPathRoundedSquareIcon,
   DocumentIcon,
@@ -11,9 +9,9 @@ import {
 import Typography from "@src/components/ui/data-display/Typography.vue";
 import IconButton from "@src/components/ui/inputs/IconButton.vue";
 
-const props = defineProps<{
-  attachment: IAttachment;
-}>();
+const props = defineProps({
+  attachment:{default:undefined},
+});
 </script>
 
 <template>

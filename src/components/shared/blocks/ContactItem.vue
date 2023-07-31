@@ -1,6 +1,4 @@
-<script setup lang="ts">
-import type { IContact, IUser } from "@src/types";
-
+<script setup>
 import useStore from "@src/store/store";
 import { getFullName } from "@src/utils";
 
@@ -8,12 +6,12 @@ import Typography from "@src/components/ui/data-display/Typography.vue";
 
 defineEmits(["contactSelected"]);
 
-const props = defineProps<{
-  contact: IContact;
-  variant?: string;
-  active?: boolean;
-  unselectable?: boolean;
-}>();
+const props = defineProps({
+  contact:{default:undefined},
+  variant:{type:String,default:''},
+  active:{type:Boolean,default:undefined},
+  unselectable:{default:undefined},
+});
 
 const store = useStore();
 </script>

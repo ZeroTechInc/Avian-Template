@@ -1,6 +1,4 @@
-<script setup lang="ts">
-import type { IAttachment } from "@src/types";
-
+<script setup>
 import {
   DocumentIcon,
   PhotoIcon,
@@ -8,10 +6,10 @@ import {
 } from "@heroicons/vue/24/outline";
 import Typography from "@src/components/ui/data-display/Typography.vue";
 
-const props = defineProps<{
-  attachment: IAttachment;
-  date: string;
-}>();
+const props = defineProps({
+  attachment:{default:undefined},
+  date: String,
+});
 </script>
 
 <template>

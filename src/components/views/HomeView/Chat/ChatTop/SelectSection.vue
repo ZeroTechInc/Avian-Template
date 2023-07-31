@@ -1,15 +1,15 @@
-<script setup lang="ts">
+<script setup>
 import Typography from "@src/components/ui/data-display/Typography.vue";
 import Button from "@src/components/ui/inputs/Button.vue";
 import Checkbox from "@src/components/ui/inputs/Checkbox.vue";
 
-const props = defineProps<{
-  selectMode: boolean;
-  selectAll: boolean;
-  handleCloseSelect: () => void;
-  handleDeselectAll: () => void;
-  handleSelectAll: () => void;
-}>();
+const props = defineProps({
+  selectMode: Boolean,
+  selectAll: Boolean,
+  handleCloseSelect: Function,
+  handleDeselectAll: Function,
+  handleSelectAll: Function,
+});
 
 // (event) toggle the select all checkbox
 const handleCheck = () => {

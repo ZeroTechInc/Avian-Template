@@ -1,5 +1,4 @@
-<script setup lang="ts">
-import type { IConversation, IUser } from "@src/types";
+<script setup>
 import { inject } from "vue";
 
 import useStore from "@src/store/store";
@@ -12,7 +11,7 @@ import MessagePreview from "@src/components/views/HomeView/Chat/MessagePreview.v
 
 const store = useStore();
 
-const activeConversation = <IConversation>inject("activeConversation");
+const activeConversation = inject("activeConversation");
 // (event) hide the pinned message
 const handleHidePinnedMessage = () => {
   if (activeConversation) {

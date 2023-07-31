@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
 import { ref } from "vue";
 
 import AccountSettings from "@src/components/views/HomeView/Sidebar/Settings/SettingsAccordion/AccountSettings.vue";
@@ -6,13 +6,7 @@ import PrivacySettings from "@src/components/views/HomeView/Sidebar/Settings/Set
 import ApperanceSettings from "@src/components/views/HomeView/Sidebar/Settings/SettingsAccordion/ApperanceSettings.vue";
 import NotificationsSettings from "@src/components/views/HomeView/Sidebar/Settings/SettingsAccordion/NotificationsSettings.vue";
 
-// Types
-enum accordionItems {
-  accountSettings = "account-settings",
-  privacySettings = "privacy-settings",
-  appearanceSettings = "appearance-settings",
-  notificationsSettings = "notifications-settings",
-}
+
 
 const accordionState = ref({
   "account-settings": true,
@@ -21,11 +15,11 @@ const accordionState = ref({
   "notifications-settings": true,
 });
 
-const handleToggle = (name: accordionItems) => {
+const handleToggle = (name) => {
   // close all opened tabs
   for (let key of Object.keys(accordionState.value)) {
     if (key !== name) {
-      accordionState.value[<accordionItems>key] = true;
+      accordionState.value[key] = true;
     }
   }
   // open the clicked tabs

@@ -1,10 +1,10 @@
-<script setup lang="ts">
+<script setup>
 import { ChatBubbleOvalLeftIcon } from "@heroicons/vue/24/outline";
 import Typography from "@src/components/ui/data-display/Typography.vue";
 
-const props = defineProps<{
-  vertical?: boolean;
-}>();
+const props = defineProps({
+  vertical:{type:Boolean,default:undefined},
+});
 </script>
 
 <template>

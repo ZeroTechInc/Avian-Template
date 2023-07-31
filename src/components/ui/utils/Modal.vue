@@ -1,28 +1,27 @@
-<script setup lang="ts">
+<script setup>
 import { useFocusTrap } from "@vueuse/integrations/useFocusTrap";
-import type { Ref } from "vue";
 import { onMounted, onUnmounted, ref, watch } from "vue";
 
 import SlideTransition from "@src/components/ui/transitions/SlideTransition.vue";
 
-const props = defineProps<{
-  open: boolean;
-  closeModal: () => void;
-}>();
+const props = defineProps({
+  open: Boolean,
+  closeModal: Function,
+});
 
-const modal: Ref<HTMLElement | undefined> = ref();
+const modal = ref();
 
 const { activate, deactivate } = useFocusTrap(modal);
 
 // (event) close modal when clicking outside
-const closeOnClick = (event: Event) => {
-  if ((event.target as HTMLDivElement).id === "close-modal") {
+const closeOnClick = (event) => {
+  if ((event.target).id === "close-modal") {
     props.closeModal();
   }
 };
 
 // (event) close modal when typing esc button
-const handleCloseOnEscape = (event: KeyboardEvent) => {
+const handleCloseOnEscape = (event) => {
   if (["Escape", "Esc"].includes(event.key)) {
     props.closeModal();
   }

@@ -1,6 +1,4 @@
-<script setup lang="ts">
-import type { IConversation, IUser } from "@src/types";
-import type { Ref } from "vue";
+<script setup>
 import { ref } from "vue";
 
 import useStore from "@src/store/store";
@@ -15,18 +13,18 @@ import Dropdown from "@src/components/ui/navigation/Dropdown/Dropdown.vue";
 import DropdownLink from "@src/components/ui/navigation/Dropdown/DropdownLink.vue";
 import ScrollBox from "@src/components/ui/utils/ScrollBox.vue";
 
-const props = defineProps<{
-  closeModal: () => void;
-  conversation: IConversation;
-}>();
+const props = defineProps({
+  closeModal: Function,
+  conversation:{default:undefined},
+});
 
 const store = useStore();
 
 // html container of the contacts list
-const contactContainer: Ref<HTMLElement | undefined> = ref();
+const contactContainer = ref();
 
 // controll the states of contact dropdown menus
-const dropdownMenuStates: Ref<boolean[] | undefined> = ref(
+const dropdownMenuStates = ref(
   props.conversation.contacts?.map(() => false)
 );
 
@@ -39,13 +37,13 @@ const closeDropdowns = () => {
 };
 
 // (event) open/close the dropdown menu
-const handleToggleDropdown = (event: Event, contactIndex: number) => {
+const handleToggleDropdown = (event, contactIndex) => {
   if (contactContainer) {
     let buttonBottom = (
-      event.currentTarget as HTMLElement
+      event.currentTarget
     ).getBoundingClientRect().bottom;
     let containerBottom = (
-      contactContainer.value as HTMLElement
+      contactContainer.value
     ).getBoundingClientRect().bottom;
 
     if (buttonBottom >= containerBottom - 50) {
@@ -67,13 +65,13 @@ const handleToggleDropdown = (event: Event, contactIndex: number) => {
 };
 
 // (event) close doprdown menu when clicking outside
-const handleClickOutside = (event: Event) => {
-  let target = event.target as HTMLElement;
+const handleClickOutside = (event) => {
+  let target = event.target;
 
   if (
     target.parentElement &&
     !target.classList.contains("open-menu") &&
-    !(target.parentElement as HTMLElement).classList.contains("open-menu")
+    !(target.parentElement).classList.contains("open-menu")
   ) {
     closeDropdowns();
   }
@@ -128,7 +126,7 @@ const handleClickOutside = (event: Event) => {
         >
           <template
             v-slot:tag
-            v-if="(props.conversation.admins as number[]).includes(contact.id)"
+            v-if="(props.conversation.admins).includes(contact.id)"
           >
             <div class="ml-3">
               <Typography variant="body-4" noColor class="text-indigo-400"
@@ -139,7 +137,7 @@ const handleClickOutside = (event: Event) => {
 
           <template
             v-slot:menu
-            v-if="store.user && (props.conversation.admins as number[]).includes(store.user.id) && contact.id !== store.user.id"
+            v-if="store.user && (props.conversation.admins).includes(store.user.id) && contact.id !== store.user.id"
           >
             <div>
               <!--dropdown menu button-->
@@ -158,7 +156,7 @@ const handleClickOutside = (event: Event) => {
               <Dropdown
                 :close-dropdown="closeDropdowns"
                 :handle-click-outside="handleClickOutside"
-                :show="(dropdownMenuStates as boolean[])[index]"
+                :show="(dropdownMenuStates)[index]"
                 :position="dropdownMenuPosition"
               >
                 <DropdownLink> Promote to admin </DropdownLink>

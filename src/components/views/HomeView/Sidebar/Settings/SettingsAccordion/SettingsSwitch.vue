@@ -1,13 +1,13 @@
-<script setup lang="ts">
+<script setup>
 import SwitchInput from "@src/components/ui/inputs/SwitchInput.vue";
 import Typography from "@src/components/ui/data-display/Typography.vue";
 
-const props = defineProps<{
-  value: boolean;
-  title: string;
-  description: string;
-  handleToggleSwitch: (value: boolean) => any;
-}>();
+const props = defineProps({
+  value: Boolean,
+  title: String,
+  description: String,
+  handleToggleSwitch: Function,
+});
 </script>
 
 <template>

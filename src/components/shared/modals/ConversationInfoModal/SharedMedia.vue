@@ -1,5 +1,4 @@
-<script setup lang="ts">
-import type { IContact, IConversation, IMessage } from "@src/types";
+<script setup>
 import { computed } from "vue";
 
 import { hasAttachments } from "@src/utils";
@@ -11,15 +10,15 @@ import SearchInput from "@src/components/ui/inputs/SearchInput.vue";
 import NoMedia from "@src/components/states/empty-states/NoMedia.vue";
 import ScrollBox from "@src/components/ui/utils/ScrollBox.vue";
 
-const props = defineProps<{
-  closeModal: () => void;
-  conversation: IConversation;
-  contact?: IContact;
-}>();
+const props = defineProps({
+  closeModal: Function,
+  conversation:{default:undefined},
+  contact:{default:undefined},
+});
 
 // extract messages that contain attachments.
 const attachmentMessages = computed(() => {
-  let media: IMessage[] = [];
+  let media = [];
   for (let message of props.conversation.messages) {
     if (hasAttachments(message)) {
       if (props.contact) {

@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
 import { EyeSlashIcon } from "@heroicons/vue/24/outline";
 
 import IconButton from "@src/components/ui/inputs/IconButton.vue";

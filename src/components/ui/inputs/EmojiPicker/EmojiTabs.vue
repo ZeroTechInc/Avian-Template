@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
 import IconButton from "@src/components/ui/inputs/IconButton.vue";
 import {
   FaceSmileIcon,
@@ -10,9 +10,9 @@ import {
   LightBulbIcon,
 } from "@heroicons/vue/24/outline";
 
-const props = defineProps<{
-  active: string;
-}>();
+const props = defineProps({
+  active: String,
+});
 </script>
 
 <template>

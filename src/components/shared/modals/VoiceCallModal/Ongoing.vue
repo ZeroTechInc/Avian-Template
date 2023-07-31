@@ -1,6 +1,4 @@
-<script setup lang="ts">
-import type { ICall, IContact } from "@src/types";
-
+<script setup>
 import { getCallName } from "@src/utils";
 
 import {
@@ -12,11 +10,11 @@ import {
 import CallAvatar from "@src/components/shared/blocks/CallAvatar.vue";
 import Typography from "@src/components/ui/data-display/Typography.vue";
 
-const props = defineProps<{
-  members: IContact[];
-  activeCall: ICall;
-  closeModal: () => void;
-}>();
+const props = defineProps({
+  members:{default:undefined},
+  activeCall:{default:undefined},
+  closeModal: Function,
+});
 </script>
 
 <template>

@@ -1,7 +1,5 @@
-<script setup lang="ts">
+<script setup>
 import { UserPlusIcon } from "@heroicons/vue/24/outline";
-import type { IContactGroup, IUser } from "@src/types";
-import type { Ref } from "vue";
 import { ref, watch } from "vue";
 
 import useStore from "@src/store/store";
@@ -16,15 +14,15 @@ import SidebarHeader from "@src/components/views/HomeView/Sidebar/SidebarHeader.
 
 const store = useStore();
 
-const searchText: Ref<string> = ref("");
+const searchText= ref("");
 
 const openModal = ref(false);
 
 // html element containing the contact groups
-const contactContainer: Ref<HTMLElement | null> = ref(null);
+const contactContainer= ref(null);
 
 // contact groups filtered by search text
-const filteredContactGroups: Ref<IContactGroup[] | undefined> = ref(
+const filteredContactGroups = ref(
   store.contactGroups
 );
 
@@ -100,7 +98,7 @@ watch(searchText, () => {
           store.user.contacts.length > 0
         "
         :contactGroups="filteredContactGroups"
-        :bottom-edge="(contactContainer as HTMLElement)?.getBoundingClientRect().bottom"
+        :bottom-edge="(contactContainer)?.getBoundingClientRect().bottom"
       />
 
       <NoContacts v-else />

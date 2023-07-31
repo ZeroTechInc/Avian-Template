@@ -1,7 +1,4 @@
-<script setup lang="ts">
-import type { Ref } from "vue";
-import type { IEmoji } from "@src/types";
-
+<script setup>
 import { watch, ref, onMounted } from "vue";
 import useStore from "@src/store/store";
 import { unicodeToEmoji } from "@src/utils";
@@ -11,47 +8,31 @@ import ScrollBox from "@src/components/ui/utils/ScrollBox.vue";
 import IconButton from "@src/components/ui/inputs/IconButton.vue";
 import Typography from "@src/components/ui/data-display/Typography.vue";
 
-interface IEmojiGroups {
-  people: IEmoji[];
-  nature: IEmoji[];
-  food: IEmoji[];
-  activity: IEmoji[];
-  travel: IEmoji[];
-  objects: IEmoji[];
-  symbols: IEmoji[];
-  flags: IEmoji[];
-}
 
-type EmojiGroupNames =
-  | "people"
-  | "nature"
-  | "food"
-  | "activity"
-  | "objects"
-  | "travel"
-  | "flags";
 
-const props = defineProps<{
-  keyword: string;
-  activeTab: string;
-}>();
+
+
+const props = defineProps({
+  keyword: String,
+  activeTab: String
+});
 
 const store = useStore();
 
 const loading = ref(true);
 
 // emojis filtered by skintone and keyword
-const filteredEmojis: Ref<IEmojiGroups> = ref(emojis);
+const filteredEmojis = ref(emojis);
 
 // Search for the emojis.
 const filterEmojis = () => {
-  const _emojiGroups = {} as IEmojiGroups;
+  const _emojiGroups = {};
 
   // search emojis
   Object.keys(emojis).forEach((key) => {
-    const _emojis: IEmoji[] = [];
+    const _emojis= [];
     if (key === props.activeTab) {
-      (emojis as IEmojiGroups)[key as EmojiGroupNames].forEach((emoji) => {
+      (emojis)[key].forEach((emoji) => {
         // if search key match
         if (emoji["n"][0].includes(props.keyword.toLocaleLowerCase())) {
           let result = emoji.u;
@@ -70,7 +51,7 @@ const filterEmojis = () => {
 
       // save filtered group to _emojiGroups
       if (_emojis.length) {
-        _emojiGroups[key as EmojiGroupNames] = _emojis;
+        _emojiGroups[key] = _emojis;
       }
     }
   });

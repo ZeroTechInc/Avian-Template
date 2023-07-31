@@ -1,13 +1,13 @@
-<script setup lang="ts">
+<script setup>
 import { ref } from "vue";
 import Emojis from "@src/components/ui/inputs/EmojiPicker/Emojis.vue";
 import EmojiSkinTones from "@src/components/ui/inputs/EmojiPicker/EmojiSkinTones.vue";
 import EmojiTabs from "@src/components/ui/inputs/EmojiPicker/EmojiTabs.vue";
 import SearchInput from "@src/components/ui/inputs/SearchInput.vue";
 
-const props = defineProps<{
-  show?: boolean;
-}>();
+const props = defineProps({
+  show:{type:Boolean,default:undefined},
+});
 
 // selected emoji groups
 const activeTab = ref("people");
@@ -16,7 +16,7 @@ const activeTab = ref("people");
 const keyword = ref("");
 
 // (event) changes the selected emoji  group
-const handleActiveTabChange = (tab: string) => {
+const handleActiveTabChange = (tab) => {
   activeTab.value = tab;
 };
 </script>

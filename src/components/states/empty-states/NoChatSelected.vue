@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
 import { ChatBubbleOvalLeftIcon } from "@heroicons/vue/24/solid";
 import Typography from "@src/components/ui/data-display/Typography.vue";
 </script>

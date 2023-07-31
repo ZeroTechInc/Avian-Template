@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
 import Button from "@src/components/ui/inputs/Button.vue";
 import DropFileUpload from "@src/components/ui/inputs/DropFileUpload.vue";
 import TextInput from "@src/components/ui/inputs/TextInput.vue";

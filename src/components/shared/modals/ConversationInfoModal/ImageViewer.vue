@@ -1,11 +1,11 @@
-<script setup lang="ts">
+<script setup>
 import { XMarkIcon } from "@heroicons/vue/24/solid";
 
-const props = defineProps<{
-  open: boolean;
-  imageUrl?: string;
-  closeImage: () => void;
-}>();
+const props = defineProps({
+  open: Boolean,
+  imageUrl:{type:String,default:''},
+  closeImage: Function,
+});
 </script>
 
 <template>
@@ -42,7 +42,7 @@ const props = defineProps<{
             <div
               class="w-full h-full px-5 flex items-center justify-center basis[90%]"
             >
-              <img :src="(props.imageUrl as string)" alt="avatar" />
+              <img :src="(props.imageUrl)" alt="avatar" />
             </div>
           </div>
         </div>

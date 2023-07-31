@@ -1,10 +1,10 @@
-<script setup lang="ts">
+<script setup>
 import { ChevronRightIcon } from "@heroicons/vue/24/outline";
 
-const props = defineProps<{
-  collapsed: boolean;
-  chevron?: boolean;
-}>();
+const props = defineProps({
+  collapsed: Boolean,
+  chevron:{type:Boolean,default:undefined},
+});
 </script>
 
 <template>

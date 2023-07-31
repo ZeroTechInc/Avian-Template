@@ -1,7 +1,7 @@
-<script setup lang="ts">
-const props = defineProps<{
-  animation: string;
-}>();
+<script setup>
+const props = defineProps({
+  animation: String
+});
 </script>
 
 <template>

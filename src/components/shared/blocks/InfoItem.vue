@@ -1,26 +1,25 @@
-<script setup lang="ts">
-import type { Component } from "vue";
+<script setup>
 import { computed } from "vue";
 
 import { ChevronRightIcon } from "@heroicons/vue/24/outline";
 import Typography from "@src/components/ui/data-display/Typography.vue";
 import SwitchInput from "@src/components/ui/inputs/SwitchInput.vue";
 
-const props = defineProps<{
-  link?: boolean;
-  icon?: Component;
-  title?: string;
-  chevron?: boolean;
-  switch?: boolean;
-  color?: string;
-}>();
+const props = defineProps({
+  link:{type:Boolean,default:undefined},
+  icon:{default:undefined},
+  title:{type:String,default:''},
+  chevron:{type:Boolean,default:undefined},
+  switch:{type:Boolean,default:undefined},
+  color:{type:String,default:''},
+});
 
 const colorClasses = computed(() => {
   if (props.color === "danger") {
     return "text-red-400 group-hover:text-red-500";
   } else {
     return `text-black dark:text-white opacity-50 dark:opacity-70
-        group-hover:text-indigo-500 group-active:text-indigo-600 
+        group-hover:text-indigo-500 group-active:text-indigo-600
         dark:group-hover:text-indigo-300 dark:group-active:text-indigo-400`;
   }
 });

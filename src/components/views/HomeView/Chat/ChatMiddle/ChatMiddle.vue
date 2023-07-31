@@ -1,6 +1,4 @@
-<script setup lang="ts">
-import type { IConversation, IMessage } from "@src/types";
-import type { Ref } from "vue";
+<script setup>
 import { inject, onMounted, ref } from "vue";
 
 import useStore from "@src/store/store";
@@ -8,20 +6,20 @@ import useStore from "@src/store/store";
 import Message from "@src/components/views/HomeView/Chat/ChatMiddle/Message/Message.vue";
 import TimelineDivider from "@src/components/views/HomeView/Chat/ChatMiddle/TimelineDivider.vue";
 
-const props = defineProps<{
-  handleSelectMessage: (messageId: number) => void;
-  handleDeselectMessage: (messageId: number) => void;
-  selectedMessages: number[];
-}>();
+const props = defineProps({
+  handleSelectMessage: Function,
+  handleDeselectMessage: Function,
+  selectedMessages:{default:undefined},
+});
 
 const store = useStore();
 
-const container: Ref<HTMLElement | null> = ref(null);
+const container= ref(null);
 
-const activeConversation = <IConversation>inject("activeConversation");
+const activeConversation = inject("activeConversation");
 
 // checks whether the previous message was sent by the same user.
-const isFollowUp = (index: number, previousIndex: number): boolean => {
+const isFollowUp = (index, previousIndex) => {
   if (previousIndex < 0) {
     return false;
   } else {
@@ -32,12 +30,12 @@ const isFollowUp = (index: number, previousIndex: number): boolean => {
 };
 
 // checks whether the message is sent by the authenticated user.
-const isSelf = (message: IMessage): boolean => {
+const isSelf = (message) => {
   return Boolean(store.user && message.sender.id === store.user.id);
 };
 
 // checks wether the new message has been sent in a new day or not.
-const renderDivider = (index: number, previousIndex: number): boolean => {
+const renderDivider = (index, previousIndex) => {
   if (index === 3) {
     return true;
   } else {
@@ -47,8 +45,8 @@ const renderDivider = (index: number, previousIndex: number): boolean => {
 
 // scroll messages to bottom.
 onMounted(() => {
-  (container.value as HTMLElement).scrollTop = (
-    container.value as HTMLElement
+  (container.value).scrollTop = (
+    container.value
   ).scrollHeight;
 });
 </script>

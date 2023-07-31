@@ -1,6 +1,4 @@
-<script setup lang="ts">
-import type { IRecording } from "@src/types";
-import type { Ref } from "vue";
+<script setup>
 
 import { ref, onMounted, onUnmounted, computed } from "vue";
 
@@ -9,12 +7,12 @@ import Typography from "@src/components/ui/data-display/Typography.vue";
 import WaveSurfer from "wavesurfer.js";
 import Spinner from "@src/components/ui/utils/Spinner.vue";
 
-const props = defineProps<{
-  recording: IRecording;
-  self?: boolean;
-}>();
+const props = defineProps({
+  recording:{default:undefined},
+  self:{type:Boolean,default:undefined},
+});
 
-const wavesurfer: Ref<any> = ref(null);
+const wavesurfer= ref(null);
 const playing = ref(false);
 const loading = ref(true);
 
@@ -32,7 +30,7 @@ const handleTogglePlay = () => {
 
 // when mounted load the audio
 onMounted(() => {
-  const waveform: HTMLElement | null = document.querySelector(
+  const waveform = document.querySelector(
     "#waveform-" + props.recording.id
   );
 

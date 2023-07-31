@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
 import { ref } from "vue";
 
 import Typography from "@src/components/ui/data-display/Typography.vue";

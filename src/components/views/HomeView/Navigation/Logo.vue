@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
 import { ref } from "vue";
 import useStore from "@src/store/store";
 import { ForwardIcon } from "@heroicons/vue/24/outline";

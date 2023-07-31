@@ -1,7 +1,6 @@
-<script setup lang="ts">
-import type { ICall } from "@src/types";
+<script setup>
 import { PlusCircleIcon } from "@heroicons/vue/24/outline";
-import { Ref, ref } from "vue";
+import { ref } from "vue";
 
 import useStore from "@src/store/store";
 
@@ -17,13 +16,13 @@ import SidebarHeader from "@src/components/views/HomeView/Sidebar/SidebarHeader.
 
 const store = useStore();
 
-const selectedCall: Ref<ICall | null> = ref(null);
+const selectedCall = ref(null);
 
 const openInfoModal = ref(false);
 
 const openDialModal = ref(false);
 
-const handleOpenInfoModal = (call: ICall) => {
+const handleOpenInfoModal = (call) => {
   openInfoModal.value = true;
   selectedCall.value = call;
 };
@@ -83,8 +82,8 @@ const handleOpenInfoModal = (call: ICall) => {
         </ExpandTransition>
 
         <CallList
-          v-if="(store.calls as ICall[])?.length > 0"
-          :calls="(store.calls as ICall[])"
+          v-if="(store.calls)?.length > 0"
+          :calls="(store.calls)"
           delay-loading="chat.delayLoading"
           :chat-status="store.status"
           :open-info-modal="handleOpenInfoModal"
@@ -98,7 +97,7 @@ const handleOpenInfoModal = (call: ICall) => {
     <CallInfoModal
       :open="openInfoModal"
       :close-modal="() => (openInfoModal = false)"
-      :call="(selectedCall as ICall)"
+      :call="(selectedCall)"
     />
 
     <!--start call modal-->

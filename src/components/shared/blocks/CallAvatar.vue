@@ -1,13 +1,12 @@
-<script setup lang="ts">
+<script setup>
 import Typography from "@src/components/ui/data-display/Typography.vue";
-import type { IContact } from "@src/types";
 
-const props = defineProps<{
-  member: IContact;
-  index: number;
-  membersLength: number;
-  large?: Boolean;
-}>();
+const props = defineProps({
+  member:{default:undefined},
+  index: Number,
+  membersLength: Number,
+  large: {type:Boolean, default:undefined},
+});
 </script>
 
 <template>

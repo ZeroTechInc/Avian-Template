@@ -1,6 +1,4 @@
-<script setup lang="ts">
-import type { Ref } from "vue";
-import type { IConversation } from "@src/types";
+<script setup>
 
 import useStore from "@src/store/store";
 import { ref, inject, onMounted } from "vue";
@@ -25,10 +23,10 @@ import Textarea from "@src/components/ui/inputs/Textarea.vue";
 
 const store = useStore();
 
-const activeConversation = <IConversation>inject("activeConversation");
+const activeConversation = inject("activeConversation");
 
 // the content of the message.
-const value: Ref<string> = ref("");
+const value= ref("");
 
 // determines whether the app is recording or not.
 const recording = ref(false);
@@ -50,9 +48,9 @@ const handleCancelRecording = () => {
 };
 
 // close picker when you click outside.
-const handleClickOutside = (event: Event) => {
-  let target = event.target as HTMLElement;
-  let parent = target.parentElement as HTMLElement;
+const handleClickOutside = (event) => {
+  let target = event.target;
+  let parent = target.parentElement;
 
   if (
     target &&

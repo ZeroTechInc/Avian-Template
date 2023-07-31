@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
 import useStore from "@src/store/store";
 
 import NoContacts from "@src/components/states/empty-states/NoContacts.vue";

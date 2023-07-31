@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
 import useStore from "@src/store/store";
 
 import AccordionButton from "@src/components/ui/data-display/AccordionButton.vue";
@@ -6,10 +6,10 @@ import Collapse from "@src/components/ui/utils/Collapse.vue";
 import SettingsSwitch from "@src/components/views/HomeView/Sidebar/Settings/SettingsAccordion/SettingsSwitch.vue";
 import Typography from "@src/components/ui/data-display/Typography.vue";
 
-const props = defineProps<{
-  collapsed: boolean;
-  handleToggle: () => void;
-}>();
+const props = defineProps({
+  collapsed: Boolean,
+  handleToggle: Function
+});
 
 const store = useStore();
 </script>

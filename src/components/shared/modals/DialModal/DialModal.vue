@@ -1,6 +1,4 @@
-<script setup lang="ts">
-import type { IContact, IUser } from "@src/types";
-import type { Ref } from "vue";
+<script setup>
 import { ref } from "vue";
 
 import useStore from "@src/store/store";
@@ -14,18 +12,18 @@ import ContactItem from "@src/components/shared/blocks/ContactItem.vue";
 import ScrollBox from "@src/components/ui/utils/ScrollBox.vue";
 import Loading1 from "@src/components/states/loading-states/Loading1.vue";
 
-const props = defineProps<{
-  closeModal: () => void;
-  open: boolean;
-}>();
+const props = defineProps({
+  closeModal: Function,
+  open: Boolean
+});
 
 const store = useStore();
 
 // a list of contacts selected to make a call
-const selectedContacts: Ref<IContact[]> = ref([]);
+const selectedContacts = ref([]);
 
 // checks whether a contact is selected or not
-const isContactSelected = (contact: IContact) => {
+const isContactSelected = (contact) => {
   if (contact) {
     return Boolean(
       selectedContacts.value.find((item) => item.id === contact.id)
@@ -36,7 +34,7 @@ const isContactSelected = (contact: IContact) => {
 };
 
 // (event) change the value of selected contacts
-const handleSelectedContactsChange = (contact: IContact) => {
+const handleSelectedContactsChange = (contact) => {
   let contactIndex = selectedContacts.value.findIndex(
     (item) => item.id === contact.id
   );

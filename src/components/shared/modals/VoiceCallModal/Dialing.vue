@@ -1,17 +1,16 @@
-<script setup lang="ts">
+<script setup>
 import { PhoneIcon, XMarkIcon } from "@heroicons/vue/24/solid";
-import { ICall, IContact } from "@src/types";
 import { getCallName } from "@src/utils";
 
 import CallAvatar from "@src/components/shared/blocks/CallAvatar.vue";
 import Typography from "@src/components/ui/data-display/Typography.vue";
 
-const props = defineProps<{
-  members: IContact[];
-  activeCall: ICall;
-  closeModal: () => void;
-  handleCallStatusChange: (status: string) => void;
-}>();
+const props = defineProps({
+  members:{default:undefined},
+  activeCall:{default:undefined},
+  closeModal: Function,
+  handleCallStatusChange: Function,
+});
 </script>
 
 <template>

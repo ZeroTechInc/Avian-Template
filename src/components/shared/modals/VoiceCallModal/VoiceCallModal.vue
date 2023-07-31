@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
 import { computed, ref } from "vue";
 
 import useStore from "@src/store/store";
@@ -9,10 +9,10 @@ import Ongoing from "@src/components/shared/modals/VoiceCallModal/Ongoing.vue";
 import FadeTransition from "@src/components/ui/transitions/FadeTransition.vue";
 import Modal from "@src/components/ui/utils/Modal.vue";
 
-const props = defineProps<{
-  open: boolean;
-  closeModal: (endCall: boolean) => void;
-}>();
+const props = defineProps({
+  open: Boolean,
+  closeModal: Function,
+});
 
 const store = useStore();
 
@@ -40,7 +40,7 @@ const ActiveComponent = computed(() => {
   }
 });
 
-const handleCallStatusChange = (status: string) => {
+const handleCallStatusChange = (status) => {
   if (store.activeCall) {
     store.activeCall.status = status;
   }

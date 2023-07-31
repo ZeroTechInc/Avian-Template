@@ -1,5 +1,5 @@
-<script setup lang="ts">
-import type { Ref } from "vue";
+<script setup>
+
 import { computed, ref } from "vue";
 
 import Contacts from "@src/components/shared/modals/ComposeModal/Contacts.vue";
@@ -9,19 +9,19 @@ import Button from "@src/components/ui/inputs/Button.vue";
 import FadeTransition from "@src/components/ui/transitions/FadeTransition.vue";
 import Modal from "@src/components/ui/utils/Modal.vue";
 
-const props = defineProps<{
-  open: boolean;
-  closeModal: () => void;
-}>();
+const props = defineProps({
+  open: Boolean,
+  closeModal: Function,
+});
 
 // the p element containing the modal title
-const modalTitle: Ref<HTMLElement | null> = ref(null);
+const modalTitle = ref(null);
 
 // the name of the selected tab
 const activeTabName = ref("contacts");
 
 // switch between the contacts and group tabs
-const switchTab = (tabName: string) => {
+const switchTab = (tabName) => {
   activeTabName.value = tabName;
 };
 

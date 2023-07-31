@@ -1,8 +1,5 @@
-<script setup lang="ts">
+<script setup>
 import { computed, ref } from "vue";
-
-import type { ICall } from "@src/types";
-
 import CallInfo from "@src/components/shared/modals/CallInfoModal/CallInfo.vue";
 import CallMembers from "@src/components/shared/modals/CallInfoModal/CallMembers.vue";
 import Button from "@src/components/ui/inputs/Button.vue";
@@ -11,11 +8,11 @@ import Modal from "@src/components/ui/utils/Modal.vue";
 
 defineEmits(["activePageChange"]);
 
-const props = defineProps<{
-  call: ICall;
-  open: boolean;
-  closeModal: () => void;
-}>();
+const props = defineProps({
+  call:{default:undefined},
+  open: Boolean,
+  closeModal: Function,
+});
 
 const activePageName = ref("call-info");
 
@@ -30,7 +27,7 @@ const ActivePage = computed(() => {
 });
 
 // (event) move between modal pages
-const changeActiveTab = (event: { tabName: string; animationName: string }) => {
+const changeActiveTab = (event) => {
   animation.value = event.animationName;
   activePageName.value = event.tabName;
 };

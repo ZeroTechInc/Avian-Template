@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
 import Typography from "@src/components/ui/data-display/Typography.vue";
 import cloudPatternPath from "@src/assets/images/clouds.png";
 import blurPath from "@src/assets/images/blur.png";

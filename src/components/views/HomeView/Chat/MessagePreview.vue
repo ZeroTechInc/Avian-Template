@@ -1,15 +1,13 @@
-<script setup lang="ts">
-import type { IAttachment, IMessage, IUser } from "@src/types";
-
+<script setup>
 import useStore from "@src/store/store";
 import { getFullName, hasAttachments, shorten } from "@src/utils";
 
 import Typography from "@src/components/ui/data-display/Typography.vue";
 
-const props = defineProps<{
-  message: IMessage;
-  self?: boolean;
-}>();
+const props = defineProps({
+  message:{default:undefined},
+  self:{type:Boolean,default:undefined},
+});
 
 const store = useStore();
 </script>
@@ -55,7 +53,7 @@ const store = useStore();
       variant="body-2"
       class="text-black opacity-50 dark:text-white dark:opacity-70"
     >
-      {{ (props.message?.attachments as IAttachment[])[0].name }}
+      {{ (props.message?.attachments)[0].name }}
     </Typography>
 
     <!--recording title-->

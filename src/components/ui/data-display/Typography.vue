@@ -1,13 +1,13 @@
-<script setup lang="ts">
+<script setup>
 import { twMerge } from "tailwind-merge";
 import { computed } from "vue";
 
-const props = defineProps<{
-  variant?: string;
-  noColor?: boolean;
-  class?: any;
-  customStyle?: string;
-}>();
+const props = defineProps({
+  variant: {type:String, default:''},
+  noColor: {type:Boolean, default:''},
+  class: {default:undefined},
+  customStyle: {type:String, default:''},
+});
 
 const style = computed(() => {
   // heading texts

@@ -1,6 +1,5 @@
-<script setup lang="ts">
+<script setup>
 import { inject } from "vue";
-import type { IConversation } from "@src/types";
 
 import { getConversationIndex } from "@src/utils";
 import useStore from "@src/store/store";
@@ -12,7 +11,7 @@ import MessagePreview from "@src/components/views/HomeView/Chat/MessagePreview.v
 
 const store = useStore();
 
-const activeConversation = <IConversation>inject("activeConversation");
+const activeConversation = inject("activeConversation");
 
 const removeReplyMessage = () => {
   if (activeConversation) {

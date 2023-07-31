@@ -1,10 +1,10 @@
-<script setup lang="ts">
+<script setup>
 import GreenChecks from "@src/assets/vectors/green_checks.svg";
 import GrayChecks from "@src/assets/vectors/gray_checks.svg";
 
-const props = defineProps<{
-  state: string;
-}>();
+const props = defineProps({
+  state: String
+});
 </script>
 
 <template>

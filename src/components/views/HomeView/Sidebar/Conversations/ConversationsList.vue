@@ -1,12 +1,11 @@
-<script setup lang="ts">
-import type { IConversation } from "@src/types";
+<script setup>
 import Conversation from "./Conversation.vue";
 
-const props = defineProps<{
-  filteredConversations?: IConversation[];
-  handleConversationChange: (conversationId: number) => void;
-  activeId?: number;
-}>();
+const props = defineProps({
+  filteredConversations:{default:undefined},
+  handleConversationChange: Function,
+  activeId:{type:Number,default:undefined}
+});
 </script>
 
 <template>

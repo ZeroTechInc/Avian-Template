@@ -1,6 +1,4 @@
-<script setup lang="ts">
-import type { IContactGroup } from "@src/types";
-import type { Ref } from "vue";
+<script setup>
 import { ref } from "vue";
 
 import { getFullName } from "@src/utils";
@@ -15,16 +13,16 @@ import IconButton from "@src/components/ui/inputs/IconButton.vue";
 import Dropdown from "@src/components/ui/navigation/Dropdown/Dropdown.vue";
 import DropdownLink from "@src/components/ui/navigation/Dropdown/DropdownLink.vue";
 
-const props = defineProps<{
-  contactGroups?: IContactGroup[];
-  bottomEdge?: number;
-}>();
+const props = defineProps({
+  contactGroups:{default:undefined},
+  bottomEdge:{type:Number,default:undefined}
+});
 
 // the position of the dropdown menu.
 const dropdownMenuPosition = ref(["top-6", "right-0"]);
 
 // controll the states of contact dropdown menus
-const dropdownMenuStates: Ref<boolean[][] | undefined> = ref(
+const dropdownMenuStates = ref(
   props.contactGroups?.map((contactGroup) => {
     let group = contactGroup.contacts.map(() => false);
     return group;
@@ -41,13 +39,13 @@ const handleCloseAllMenus = () => {
 
 // (event) open/close the selected dropdown menu.
 const handleToggleDropdown = (
-  event: Event,
-  groupIndex: number,
-  index: number
+  event,
+  groupIndex,
+  index
 ) => {
   if (props.bottomEdge) {
     let buttonBottom = (
-      event.currentTarget as HTMLElement
+      event.currentTarget
     ).getBoundingClientRect().bottom;
 
     if (buttonBottom >= props.bottomEdge - 75) {
@@ -57,7 +55,7 @@ const handleToggleDropdown = (
     }
   }
 
-  dropdownMenuStates.value = (dropdownMenuStates.value as boolean[][]).map(
+  dropdownMenuStates.value = (dropdownMenuStates.value).map(
     (group) => {
       return group.map((value, idx) => {
         if (idx === index) return value;
@@ -67,14 +65,14 @@ const handleToggleDropdown = (
   );
 
   dropdownMenuStates.value[groupIndex][index] = !(
-    dropdownMenuStates.value as boolean[][]
+    dropdownMenuStates.value
   )[groupIndex][index];
 };
 
 // (event) close doprdown menu when clicking outside
-const handleClickOutside = (event: Event) => {
-  let target = event.target as HTMLElement;
-  let parentElement = target.parentElement as HTMLElement;
+const handleClickOutside = (event) => {
+  let target = event.target;
+  let parentElement = target.parentElement;
 
   if (
     target &&
@@ -113,7 +111,7 @@ const handleClickOutside = (event: Event) => {
           <!--dropdown menu button-->
           <IconButton
             :id="'open-contact-menu-' + index"
-            :aria-expanded="(dropdownMenuStates as boolean[][])[groupIndex][index]"
+            :aria-expanded="(dropdownMenuStates)[groupIndex][index]"
             :aria-controls="'contact-menu-' + index"
             @click="(event) => handleToggleDropdown(event, groupIndex, index)"
             class="open-menu w-6 h-6"
@@ -131,7 +129,7 @@ const handleClickOutside = (event: Event) => {
             :close-dropdown="handleCloseAllMenus"
             :handle-click-outside="handleClickOutside"
             :aria-labelledby="'open-contact-menu-' + index"
-            :show="(dropdownMenuStates as boolean[][])[groupIndex][index]"
+            :show="(dropdownMenuStates)[groupIndex][index]"
             :position="dropdownMenuPosition"
           >
             <DropdownLink>

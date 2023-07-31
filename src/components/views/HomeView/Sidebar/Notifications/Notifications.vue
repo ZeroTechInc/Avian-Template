@@ -1,5 +1,4 @@
-<script setup lang="ts">
-import type { INotification } from "@src/types";
+<script setup>
 import useStore from "@src/store/store";
 
 import NoNotifications from "@src/components/states/empty-states/NoNotifications.vue";
@@ -21,7 +20,7 @@ const store = useStore();
       style="overflow-x: visible; overflow-y: scroll"
     >
       <Loading1
-        v-if="store.status === 'loading'  || store.delayLoading && (store.notifications as INotification[]).length > 0"
+        v-if="store.status === 'loading'  || store.delayLoading && (store.notifications).length > 0"
         v-for="item in 6"
       />
 

@@ -1,5 +1,4 @@
-<script setup lang="ts">
-import type { IConversation, IMessage } from "@src/types";
+<script setup>
 import { inject } from "vue";
 
 import useStore from "@src/store/store";
@@ -16,20 +15,20 @@ import {
 import Dropdown from "@src/components/ui/navigation/Dropdown/Dropdown.vue";
 import DropdownLink from "@src/components/ui/navigation/Dropdown/DropdownLink.vue";
 
-const props = defineProps<{
-  message: IMessage;
-  show: boolean;
-  left: number;
-  top: number;
-  selected: boolean;
-  handleCloseContextMenu: () => void;
-  handleSelectMessage: (messageId: number) => void;
-  handleDeselectMessage: (messageId: number) => void;
-}>();
+const props = defineProps({
+  message:{default:undefined},
+  show: Boolean,
+  left: Number,
+  top: Number,
+  selected: Boolean,
+  handleCloseContextMenu: Function,
+  handleSelectMessage: Function,
+  handleDeselectMessage: Function,
+});
 
 const store = useStore();
 
-const activeConversation = <IConversation>inject("activeConversation");
+const activeConversation = inject("activeConversation");
 
 // (event) pin message to conversation
 const handlePinMessage = () => {

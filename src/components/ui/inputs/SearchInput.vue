@@ -1,22 +1,20 @@
-<script setup lang="ts">
-import type { Ref } from "vue";
-
+<script setup>
 import { twMerge } from "tailwind-merge";
 import { ref, computed } from "vue";
 
 import { MagnifyingGlassIcon, XCircleIcon } from "@heroicons/vue/24/outline";
 import IconButton from "@src/components/ui/inputs/IconButton.vue";
 
-const props = defineProps<{
-  variant?: string;
-  class?: string;
-}>();
+const props = defineProps({
+  variant:{type:String,default:''},
+  class:{type:String,default:''},
+});
 
-const input: Ref<HTMLInputElement | null> = ref(null);
+const input = ref(null);
 
 const baseClasses = `w-full h-8 py-3 px-7 border outline-none rounded-sm text-black
 dark:text-white dark:opacity-70 placeholder:text-black placeholder:opacity-40
-dark:placeholder:text-white dark:placeholder:opacity-70 focus:outline-none 
+dark:placeholder:text-white dark:placeholder:opacity-70 focus:outline-none
 focus:ring focus:ring-indigo-100 duration-200 transition ease-out
 text-opacity-70`;
 
@@ -44,7 +42,7 @@ const classes = twMerge(baseClasses, variantClasses.value, props.class);
       placeholder="Search.."
       :class="classes"
       @input="$event => {
-        $emit('update:modelValue', ($event.target as HTMLInputElement).value)
+        $emit('update:modelValue', ($event.target).value)
       }
       "
     />

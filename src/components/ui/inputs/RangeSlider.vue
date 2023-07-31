@@ -1,15 +1,14 @@
-<script setup lang="ts">
-import type { Ref } from "vue";
+<script setup>
 import { onMounted, ref, watch } from "vue";
 
-const props = defineProps<{
-  id: string;
-  self?: boolean;
-  initialValue?: number;
-  percentage?: number;
-}>();
+const props = defineProps({
+  id: String,
+  self:{type:Boolean,default:undefined},
+  initialValue:{type:Number,default:undefined},
+  percentage:{type:Number,default:undefined},
+});
 
-const range: Ref<any> = ref(null);
+const range= ref(null);
 
 const style = document.createElement("style");
 
@@ -61,9 +60,9 @@ watch(
     class="slider"
     :id="props.id"
     :value="value"
-    @input="$event => { 
+    @input="$event => {
       changeBarStyle();
-      $emit('valueChange', ($event.target as HTMLInputElement).value);
+      $emit('valueChange', ($event.target).value);
     }"
   />
 </template>

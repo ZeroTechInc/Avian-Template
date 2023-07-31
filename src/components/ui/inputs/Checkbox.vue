@@ -1,11 +1,11 @@
-<script setup lang="ts">
+<script setup>
 import { CheckIcon } from "@heroicons/vue/24/outline";
 
-const props = defineProps<{
-  value: boolean;
-  inputId?: string;
-  handleCheck?: () => void;
-}>();
+const props = defineProps({
+  value: Boolean,
+  inputId:{type:String,default:undefined},
+  handleCheck:{type:Function,default:undefined},
+});
 </script>
 
 <template>

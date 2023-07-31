@@ -1,19 +1,19 @@
-<script setup lang="ts">
+<script setup>
 import { computed } from "vue";
 import { twMerge } from "tailwind-merge";
 
 defineEmits(["valueChanged"]);
 
-const props = defineProps<{
-  id?: string;
-  type?: string;
-  label?: string;
-  value?: string;
-  placeholder?: string;
-  description?: string;
-  variant?: string;
-  class?: string;
-}>();
+const props = defineProps({
+  id:{type:String,default:''},
+  type:{type:String,default:''},
+  label:{type:String,default:''},
+  value:{type:String,default:''},
+  placeholder:{type:String,default:''},
+  description:{type:String,default:''},
+  variant:{type:String,default:''},
+  class:{type:String,default:''},
+});
 
 const baseClasses = `max-w-full w-full h-8 p-4 rounded-sm content-center
         placeholder:text-black placeholder:opacity-40 text-opacity-70 dark:placeholder:text-white dark:placeholder:opacity-70
@@ -25,8 +25,8 @@ const variantClasses = computed(() => {
             dark:text-white dark:bg-opacity-70 dark:focus:bg-opacity-0 focus:bg-opacity-0 focus:border-indigo-300
             dark:border-gray-600`;
   } else {
-    return `text-black bg-gray-50 dark:text-white border-opacity-0 
-            dark:bg-gray-700 dark:bg-opacity-70 dark:border-opacity-70 dark:border-gray-700 
+    return `text-black bg-gray-50 dark:text-white border-opacity-0
+            dark:bg-gray-700 dark:bg-opacity-70 dark:border-opacity-70 dark:border-gray-700
             focus:ring focus:ring-indigo-100 dark:focus:bg-opacity-0 focus:bg-opacity-0`;
   }
 });
@@ -49,7 +49,7 @@ const classes = twMerge(baseClasses, variantClasses.value, props.class);
     <div class="relative">
       <input
         @input="
-          $emit('valueChanged', ($event.target as HTMLInputElement).value)
+          $emit('valueChanged', ($event.target).value)
         "
         :type="props.type || 'text'"
         :id="props.id"

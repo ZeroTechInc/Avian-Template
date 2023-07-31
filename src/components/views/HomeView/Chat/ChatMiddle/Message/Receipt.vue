@@ -1,10 +1,10 @@
-<script setup lang="ts">
+<script setup>
 import { CheckIcon, ClockIcon } from "@heroicons/vue/24/outline";
 import DoubleChecks from "@src/components/views/HomeView/Chat/ChatMiddle/Message/DoubleChecks.vue";
 
-const props = defineProps<{
-  state: string;
-}>();
+const props = defineProps({
+  state: String
+});
 </script>
 
 <template>

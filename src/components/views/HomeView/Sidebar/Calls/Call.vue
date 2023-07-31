@@ -1,7 +1,5 @@
-<script setup lang="ts">
+<script setup>
 import { computed } from "vue";
-
-import { ICall } from "@src/types";
 import { getCallName, getOtherMembers } from "@src/utils";
 
 import {
@@ -13,13 +11,13 @@ import {
 import Typography from "@src/components/ui/data-display/Typography.vue";
 import CallAvatar from "@src/components/shared/blocks/CallAvatar.vue";
 
-const props = defineProps<{
-  call: ICall;
-  active?: boolean;
-  openInfoModal?: (call: ICall) => void;
-  openVoiceCallModal?: () => void;
-  endCall?: () => void;
-}>();
+const props = defineProps({
+  call:{default:undefined},
+  active:{type:Boolean,default:undefined},
+  openInfoModal:{type:Function,default:undefined},
+  openVoiceCallModal:{type:Function,default:undefined},
+  endCall:{type:Function,default:undefined},
+});
 
 const members = computed(() => {
   return getOtherMembers(props.call);

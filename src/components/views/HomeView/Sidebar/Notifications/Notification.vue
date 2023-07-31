@@ -1,5 +1,4 @@
-<script setup lang="ts">
-import type { INotification } from "@src/types";
+<script setup>
 
 import Typography from "@src/components/ui/data-display/Typography.vue";
 import {
@@ -8,9 +7,9 @@ import {
   PlusCircleIcon,
 } from "@heroicons/vue/24/outline";
 
-const props = defineProps<{
-  notification: INotification;
-}>();
+const props = defineProps({
+  notification:{default:undefined}
+});
 </script>
 
 <template>

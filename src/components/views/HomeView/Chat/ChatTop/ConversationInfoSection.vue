@@ -1,5 +1,4 @@
-<script setup lang="ts">
-import type { IConversation } from "@src/types";
+<script setup>
 
 import { activeCall } from "@src/store/defaults";
 import useStore from "@src/store/store";
@@ -20,14 +19,14 @@ import IconButton from "@src/components/ui/inputs/IconButton.vue";
 import Dropdown from "@src/components/ui/navigation/Dropdown/Dropdown.vue";
 import DropdownLink from "@src/components/ui/navigation/Dropdown/DropdownLink.vue";
 
-const props = defineProps<{
-  handleOpenInfo: () => void;
-  handleOpenSearch: () => void;
-}>();
+const props = defineProps({
+  handleOpenInfo: Function,
+  handleOpenSearch: Function,
+});
 
 const store = useStore();
 
-const activeConversation = <IConversation>inject("activeConversation");
+const activeConversation = inject("activeConversation");
 
 const showDropdown = ref(false);
 
@@ -37,15 +36,15 @@ const handleCloseDropdown = () => {
 };
 
 // (event) close dropdown menu when clicking outside the menu.
-const handleClickOutside = (event: Event) => {
-  let target = event.target as HTMLElement;
-  let parentElement = target.parentElement as HTMLElement;
+const handleClickOutside = (event) => {
+  let target = event.target;
+  let parentElement = target.parentElement;
 
   if (
     target &&
-    !(target.classList as Element["classList"]).contains("open-top-menu") &&
+    !(target.classList).contains("open-top-menu") &&
     parentElement &&
-    !(parentElement.classList as Element["classList"]).contains("open-top-menu")
+    !(parentElement.classList).contains("open-top-menu")
   ) {
     handleCloseDropdown();
   }

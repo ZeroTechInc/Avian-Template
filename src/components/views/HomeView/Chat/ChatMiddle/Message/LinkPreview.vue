@@ -1,12 +1,10 @@
-<script setup lang="ts">
+<script setup>
 import { LinkIcon } from "@heroicons/vue/24/outline";
 
-import { IPreviewData } from "@src/types";
-
-const props = defineProps<{
-  self?: boolean;
-  previewData: IPreviewData;
-}>();
+const props = defineProps({
+  self:{type:Boolean,default:undefined},
+  previewData:{default:undefined},
+});
 </script>
 
 <template>

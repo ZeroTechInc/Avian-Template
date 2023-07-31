@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
 import ResetForm from "@src/components/views/PasswordResetView/PasswordResetForm.vue";
 </script>
 

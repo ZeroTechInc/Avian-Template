@@ -1,8 +1,6 @@
-<script setup lang="ts">
+<script setup>
 import { ArrowUturnLeftIcon } from "@heroicons/vue/24/solid";
 import { computed, ref } from "vue";
-
-import { IContact, IConversation } from "@src/types";
 import { getAvatar, getFullName, getName, getOddContact } from "@src/utils";
 
 import {
@@ -21,11 +19,11 @@ import Typography from "@src/components/ui/data-display/Typography.vue";
 import Button from "@src/components/ui/inputs/Button.vue";
 import IconButton from "@src/components/ui/inputs/IconButton.vue";
 
-const props = defineProps<{
-  conversation: IConversation;
-  contact?: IContact;
-  closeModal: () => void;
-}>();
+const props = defineProps({
+  conversation:{default:undefined},
+  contact:{default:undefined},
+  closeModal: Function,
+});
 
 const openImageViewer = ref(false);
 

@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
 import { ref } from "vue";
 
 import Typography from "@src/components/ui/data-display/Typography.vue";
@@ -7,25 +7,25 @@ const emit = defineEmits(["valueChanged"]);
 
 const active = ref(false);
 
-const props = defineProps<{
-  id?: string;
-  label?: string;
-  value?: File;
-  description?: string;
-  accept?: string;
-}>();
+const props = defineProps({
+  id:{type:String,default:''},
+  label:{type:String,default:''},
+  value:{type:File,default:undefined},
+  description:{type:String,default:''},
+  accept:{type:String,default:''},
+});
 
 // (event) handle change when droping files
-const handleFileDrop = (event: any) => {
+const handleFileDrop = (event) => {
   active.value = false;
-  emit("valueChanged", (event.dataTransfer as DataTransfer).files[0]);
+  emit("valueChanged", (event.dataTransfer).files[0]);
 };
 
 // (event) handle change when input files.
-const handleFileChange = (event: Event) => {
+const handleFileChange = (event) => {
   emit(
     "valueChanged",
-    ((event.target as HTMLInputElement).files as FileList)[0]
+    ((event.target).files)[0]
   );
 };
 </script>

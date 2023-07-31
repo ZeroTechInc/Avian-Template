@@ -1,6 +1,4 @@
-<script setup lang="ts">
-import type { IAttachment, IConversation, IRecording } from "@src/types";
-import type { Ref } from "vue";
+<script setup>
 import { computed, ref } from "vue";
 
 import {
@@ -22,21 +20,21 @@ import Typography from "@src/components/ui/data-display/Typography.vue";
 import Dropdown from "@src/components/ui/navigation/Dropdown/Dropdown.vue";
 import DropdownLink from "@src/components/ui/navigation/Dropdown/DropdownLink.vue";
 
-const props = defineProps<{
-  conversation: IConversation;
-  isActive?: boolean;
-  handleConversationChange?: (conversationId: number) => void;
-}>();
+const props = defineProps({
+  conversation:{default:undefined},
+  isActive:{type:Boolean,default:undefined},
+  handleConversationChange:{type:Function,default:undefined}
+});
 
 const store = useStore();
 
 const showContextMenu = ref(false);
 
-const contextMenuCoordinations: Ref<{ x: number; y: number } | undefined> =
+const contextMenuCoordinations =
   ref();
 
 // open context menu.
-const handleShowContextMenu = (event: any) => {
+const handleShowContextMenu = (event) => {
   showContextMenu.value = true;
   contextMenuCoordinations.value = {
     x:
@@ -156,7 +154,7 @@ const handleRemoveUnread = () => {
               />
               <span :class="{ 'text-indigo-400': props.conversation.unread }">
                 Recording
-                {{ (lastMessage.content as IRecording).duration }}
+                {{ (lastMessage.content).duration }}
               </span>
             </Typography>
 
@@ -168,7 +166,7 @@ const handleRemoveUnread = () => {
               :class="{ 'text-indigo-400': props.conversation.unread }"
             >
               <span :class="{ 'text-indigo-400': props.conversation.unread }">
-                {{ (lastMessage?.attachments as IAttachment[])[0].name }}
+                {{ (lastMessage?.attachments)[0].name }}
               </span>
             </Typography>
 

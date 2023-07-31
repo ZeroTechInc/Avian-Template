@@ -1,6 +1,4 @@
-<script setup lang="ts">
-import type { IConversation } from "@src/types";
-import type { Ref } from "vue";
+<script setup>
 import { onMounted, ref, watch } from "vue";
 
 import useStore from "@src/store/store";
@@ -19,7 +17,7 @@ import SidebarHeader from "@src/components/views/HomeView/Sidebar/SidebarHeader.
 
 const store = useStore();
 
-const keyword: Ref<string> = ref("");
+const keyword = ref("");
 
 const composeOpen = ref(false);
 
@@ -27,7 +25,7 @@ const composeOpen = ref(false);
 const openArchive = ref(false);
 
 // the filtered list of conversations.
-const filteredConversations: Ref<IConversation[]> = ref(store.conversations);
+const filteredConversations= ref(store.conversations);
 
 // filter the list of conversation based on search text.
 watch([keyword, openArchive], () => {
@@ -51,7 +49,7 @@ watch([keyword, openArchive], () => {
 });
 
 // (event) switch between the rendered conversations.
-const handleConversationChange = (conversationId: number) => {
+const handleConversationChange = (conversationId) => {
   store.activeConversationId = conversationId;
   store.conversationOpen = "open";
 };
@@ -128,7 +126,7 @@ onMounted(() => {
             <component
               :is="ConversationsList"
               :filtered-conversations="filteredConversations"
-              :active-id="(store.activeConversationId as number)"
+              :active-id="(store.activeConversationId)"
               :handle-conversation-change="handleConversationChange"
               :key="openArchive ? 'archive' : 'active'"
             />

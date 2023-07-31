@@ -1,8 +1,6 @@
-<script setup lang="ts">
-import type { Ref } from "vue";
+<script setup>
 import { computed, inject, onMounted, onUnmounted, ref, watch } from "vue";
 
-import type { IAttachment, IConversation } from "@src/types";
 import { hasAttachments } from "@src/utils";
 import { useFocusTrap } from "@vueuse/integrations/useFocusTrap";
 import VideoPlayer from "@src/components/ui/data-display/VideoPlayer.vue";
@@ -12,18 +10,18 @@ import ScaleTransition from "../../transitions/ScaleTransition.vue";
 import FadeTransition from "../../transitions/FadeTransition.vue";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/vue/24/solid";
 
-const props = defineProps<{
-  open: boolean;
-  startingId?: number;
-  closeCarousel: () => void;
-}>();
+const props = defineProps({
+  open: Boolean,
+  startingId:{type:Number,default:undefined},
+  closeCarousel: Function,
+});
 
-const carousel: Ref<HTMLElement | undefined> = ref();
+const carousel = ref();
 
 const { activate, deactivate } = useFocusTrap(carousel);
 
 // the active conversation
-const conversation = <IConversation>inject("activeConversation");
+const conversation = inject("activeConversation");
 
 // index of the current open attachment in the
 const currentIndex = ref(0);
@@ -52,7 +50,7 @@ const attachments = computed(() => {
 
 // the index of the attachment we start from
 const startingIndex = computed(() => {
-  let startingIndex: number | undefined;
+  let startingIndex;
 
   attachments.value.forEach((value, index) => {
     if (value.id === props.startingId) {
@@ -66,7 +64,7 @@ const startingIndex = computed(() => {
 // the selected attachment
 const selectedAttachment = computed(() => {
   return attachments.value[
-    moved ? (currentIndex.value as number) : (startingIndex.value as number)
+    moved ? (currentIndex.value) : (startingIndex.value)
   ];
 });
 
@@ -78,14 +76,14 @@ const handleCloseCarousel = () => {
 
 // check if there is a next attachment.
 const thereIsNext = () => {
-  let length = (attachments.value as IAttachment[])?.length;
+  let length = (attachments.value)?.length;
 
   return length > 0 && !(currentIndex.value + 1 >= length);
 };
 
 // check if there is a previous attachment.
 const thereIsPrevious = () => {
-  let length = (attachments.value as IAttachment[])?.length;
+  let length = (attachments.value)?.length;
   return length > 0 && !(currentIndex.value <= 0);
 };
 
@@ -94,7 +92,7 @@ const handleNextItem = () => {
   if (thereIsNext()) {
     zoom.value = 1;
     moved.value = true;
-    (currentIndex.value as number)++;
+    (currentIndex.value)++;
   }
 };
 
@@ -103,12 +101,12 @@ const handlePreviousItem = () => {
   if (thereIsPrevious()) {
     zoom.value = 1;
     moved.value = true;
-    (currentIndex.value as number)--;
+    (currentIndex.value)--;
   }
 };
 
 // (event) close modal when typing esc button
-const handleCloseOnEscape = (event: KeyboardEvent) => {
+const handleCloseOnEscape = (event) => {
   if (["Escape", "Esc"].includes(event.key)) {
     props.closeCarousel();
   }
@@ -118,7 +116,7 @@ watch(
   () => props.open,
   () => {
     //  when modal opens make the value of currentIndex equal to the starting index
-    currentIndex.value = startingIndex.value as number;
+    currentIndex.value = startingIndex.value;
 
     // toggle focus when the modal opens
     if (props.open) {
@@ -135,7 +133,7 @@ watch(
 
 onMounted(() => {
   // when first opened set currentIndex to startingIndex.
-  currentIndex.value = startingIndex.value as number;
+  currentIndex.value = startingIndex.value;
   // set the handleCloseOnEscape when mounting the component
   document.addEventListener("keydown", handleCloseOnEscape);
 });
@@ -226,7 +224,7 @@ const handleDecreaseZoom = () => {
                 :id="'video-player-' + selectedAttachment.id"
                 v-if="selectedAttachment.type === 'video'"
                 :url="selectedAttachment.url"
-                :thumbnail="(selectedAttachment.thumbnail as string)"
+                :thumbnail="(selectedAttachment.thumbnail)"
                 :key="selectedAttachment.id"
               />
             </div>

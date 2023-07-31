@@ -1,13 +1,13 @@
-<script setup lang="ts">
+<script setup>
 import Typography from "@src/components/ui/data-display/Typography.vue";
 import Button from "@src/components/ui/inputs/Button.vue";
 import TextInput from "@src/components/ui/inputs/TextInput.vue";
 import Modal from "@src/components/ui/utils/Modal.vue";
 
-const props = defineProps<{
-  openModal: boolean;
-  closeModal: () => void;
-}>();
+const props = defineProps({
+  openModal: Boolean,
+  closeModal: Function,
+});
 </script>
 
 <template>

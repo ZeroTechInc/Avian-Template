@@ -1,6 +1,4 @@
-<script setup lang="ts">
-import type { IConversation } from "@src/types";
-
+<script setup>
 import NoMessage from "@src/components/states/empty-states/NoMessage.vue";
 import Typography from "@src/components/ui/data-display/Typography.vue";
 import Button from "@src/components/ui/inputs/Button.vue";
@@ -9,11 +7,11 @@ import Modal from "@src/components/ui/utils/Modal.vue";
 import MessageItem from "@src/components/shared/modals/SearchModal/MessageItem.vue";
 import ScrollBox from "@src/components/ui/utils/ScrollBox.vue";
 
-const props = defineProps<{
-  open: boolean;
-  closeModal: () => void;
-  conversation: IConversation;
-}>();
+const props = defineProps({
+  open: Boolean,
+  closeModal: Function,
+  conversation:{default:undefined},
+});
 </script>
 
 <template>

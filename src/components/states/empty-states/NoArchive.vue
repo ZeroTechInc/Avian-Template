@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
 import { InboxIcon } from "@heroicons/vue/24/outline";
 import Typography from "@src/components/ui/data-display/Typography.vue";
 </script>

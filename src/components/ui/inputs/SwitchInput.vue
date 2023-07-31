@@ -1,15 +1,15 @@
-<script setup lang="ts">
+<script setup>
 const emit = defineEmits(["switchClicked"]);
 
-const props = defineProps<{
-  id?: string;
-  label?: string;
-  value: boolean;
-  description?: string;
-}>();
+const props = defineProps({
+  id:{type:String,default:''},
+  label:{type:String,default:''},
+  value: Boolean,
+  description:{type:String,default:''},
+});
 
 // (event) toggle the switch when pressing enter
-const handleToggleSwitchOnEnter = (event: KeyboardEvent) => {
+const handleToggleSwitchOnEnter = (event) => {
   if (event.key === "Enter") {
     emit("switchClicked", !props.value);
   }

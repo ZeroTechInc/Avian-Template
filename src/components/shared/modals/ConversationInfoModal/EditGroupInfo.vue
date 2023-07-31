@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
 import { ArrowUturnLeftIcon } from "@heroicons/vue/24/solid";
 import Typography from "@src/components/ui/data-display/Typography.vue";
 import Button from "@src/components/ui/inputs/Button.vue";

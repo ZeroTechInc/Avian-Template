@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
 import SidebarHeader from "@src/components/views/HomeView/Sidebar/SidebarHeader.vue";
 import SettingsAccordion from "@src/components/views/HomeView/Sidebar/Settings/SettingsAccordion/SettingsAccordion.vue";
 </script>

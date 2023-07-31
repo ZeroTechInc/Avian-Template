@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
 import { ref } from "vue";
 import { VideoPlayer } from "@videojs-player/vue";
 import {
@@ -11,17 +11,17 @@ import RangeSlider from "@src/components/ui/inputs/RangeSlider.vue";
 
 import "video.js/dist/video-js.css";
 
-const props = defineProps<{
-  id: string;
-  url: string;
-  thumbnail: string;
-}>();
+const props = defineProps({
+  id: String,
+  url: String,
+  thumbnail: String,
+});
 
 const percentage = ref(0);
 
 const fullScreen = ref(false);
 
-const handleTimeChange = (event: any) => {
+const handleTimeChange = (event) => {
   percentage.value = Math.floor(
     (event.target.player.cache_.currentTime /
       event.target.player.cache_.duration) *
@@ -29,7 +29,7 @@ const handleTimeChange = (event: any) => {
   );
 };
 
-const handleTrackInput = (value: any, player: any, state: any) => {
+const handleTrackInput = (value, player, state) => {
   player.currentTime((value / 100) * state.duration);
 };
 </script>

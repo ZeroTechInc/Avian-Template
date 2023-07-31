@@ -1,10 +1,10 @@
-<script setup lang="ts">
+<script setup>
 import { twMerge } from "tailwind-merge";
 import { computed } from "vue";
 
-const props = defineProps<{
-  variant?: string;
-}>();
+const props = defineProps({
+  variant:{type:String,default:''}
+});
 
 let baseClasses = `group flex justify-center items-center
     outline-none rounded-full focus:outline-none transition-all

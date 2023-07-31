@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
 import { ref } from "vue";
 
 import useStore from "@src/store/store";
@@ -21,7 +21,7 @@ const store = useStore();
 const showDropdown = ref(false);
 
 // (event) change the active sidebar component when clicking on a NavLink
-const handleActiveSidebarComponentChange = (value: string) => {
+const handleActiveSidebarComponentChange = (value) => {
   store.activeSidebarComponent = value;
 };
 </script>

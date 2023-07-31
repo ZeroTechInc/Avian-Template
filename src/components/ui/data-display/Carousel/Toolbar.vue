@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
 import {
   XMarkIcon,
   MagnifyingGlassPlusIcon,
@@ -7,12 +7,12 @@ import {
 } from "@heroicons/vue/24/outline";
 import IconButton from "@src/components/ui/inputs/IconButton.vue";
 
-const props = defineProps<{
-  handleCloseCarousel: () => void;
-  handleIncreaseZoom: () => void;
-  handleDecreaseZoom: () => void;
-  isImage: boolean;
-}>();
+const props = defineProps({
+  handleCloseCarousel: Function,
+  handleIncreaseZoom: Function,
+  handleDecreaseZoom: Function,
+  isImage: Boolean,
+});
 </script>
 
 <template>

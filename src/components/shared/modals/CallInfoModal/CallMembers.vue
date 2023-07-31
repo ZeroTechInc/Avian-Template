@@ -1,16 +1,15 @@
-<script setup lang="ts">
+<script setup>
 import { ArrowUturnLeftIcon } from "@heroicons/vue/24/solid";
 
-import type { ICall } from "@src/types";
 
 import Typography from "@src/components/ui/data-display/Typography.vue";
 import SearchInput from "@src/components/ui/inputs/SearchInput.vue";
 import ContactItem from "@src/components/shared/blocks/ContactItem.vue";
 import ScrollBox from "@src/components/ui/utils/ScrollBox.vue";
 
-const props = defineProps<{
-  call: ICall;
-}>();
+const props = defineProps({
+  call:{default:undefined},
+});
 </script>
 
 <template>

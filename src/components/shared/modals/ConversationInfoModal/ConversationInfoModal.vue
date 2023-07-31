@@ -1,8 +1,5 @@
-<script setup lang="ts">
-import type { Ref } from "vue";
+<script setup>
 import { computed, ref } from "vue";
-
-import type { IContact, IConversation } from "@src/types";
 
 import ConversationInfo from "@src/components/shared/modals/ConversationInfoModal/ConversationInfo.vue";
 import EditGroupInfo from "@src/components/shared/modals/ConversationInfoModal/EditGroupInfo.vue";
@@ -13,14 +10,14 @@ import SlideTransition from "@src/components/ui/transitions/SlideTransition.vue"
 
 defineEmits(["activePageChange"]);
 
-const props = defineProps<{
-  open: boolean;
-  conversation: IConversation;
-  closeModal: () => void;
-}>();
+const props = defineProps({
+  open:{default:undefined},
+  conversation:{default:undefined},
+  closeModal: Function,
+});
 
 // selected group member
-const selectedMember: Ref<IContact | undefined> = ref();
+const selectedMember = ref();
 
 // used to determine whether to slide left or right
 const animation = ref("slide-left");
@@ -38,12 +35,7 @@ const ActivePage = computed(() => {
 });
 
 // (event) move between modal pages
-const changeActiveTab = (event: {
-  tabName: string;
-  animationName: string;
-  contact?: IContact;
-  removeContact?: boolean;
-}) => {
+const changeActiveTab = (event) => {
   animation.value = event.animationName;
   activePageName.value = event.tabName;
 

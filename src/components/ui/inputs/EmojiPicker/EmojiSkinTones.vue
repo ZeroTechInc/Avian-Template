@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
 import { ref } from "vue";
 import FadeTransition from "@src/components/ui/transitions/FadeTransition.vue";
 import useStore from "@src/store/store";
@@ -7,7 +7,7 @@ import Typography from "@src/components/ui/data-display/Typography.vue";
 const store = useStore();
 const select = ref(false);
 
-const skinToneColor: any = {
+const skinToneColor = {
   "1f3ff": "bg-[#60463A]",
   "1f3fe": "bg-[#A86637]",
   "1f3fd": "bg-[#C88E62]",
@@ -16,7 +16,7 @@ const skinToneColor: any = {
 };
 
 // (event) change the skin tone of the emojis
-const handleChangeSkinTone = (tone: string) => {
+const handleChangeSkinTone = (tone) => {
   select.value = false;
   store.emojiSkinTone = tone;
 };

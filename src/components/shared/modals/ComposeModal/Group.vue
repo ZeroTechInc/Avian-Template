@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup >
 import { computed, ref } from "vue";
 
 import GroupInfo from "@src/components/shared/modals/ComposeModal/GroupInfo.vue";
@@ -20,7 +20,7 @@ const ActivePage = computed(() => {
 });
 
 // event to move between modal pages
-const changeActiveTab = (event: { tabName: string; animationName: string }) => {
+const changeActiveTab = (event) => {
   animation.value = event.animationName;
   activePageName.value = event.tabName;
 };

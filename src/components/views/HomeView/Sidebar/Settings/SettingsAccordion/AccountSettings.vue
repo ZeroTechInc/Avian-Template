@@ -1,6 +1,5 @@
-<script setup lang="ts">
+<script setup>
 import { ref } from "vue";
-import type { Ref } from "vue";
 
 import useStore from "@src/store/store";
 
@@ -11,22 +10,17 @@ import TextInput from "@src/components/ui/inputs/TextInput.vue";
 import DropFileUpload from "@src/components/ui/inputs/DropFileUpload.vue";
 import Button from "@src/components/ui/inputs/Button.vue";
 
-// Types
-interface AccountValues {
-  firstName: string | undefined;
-  lastName: string | undefined;
-  avatar: File | undefined;
-}
+
 
 // Variables
-const props = defineProps<{
-  collapsed: boolean;
-  handleToggle: () => void;
-}>();
+const props = defineProps({
+  collapsed: Boolean,
+  handleToggle: Function,
+});
 
 const store = useStore();
 
-const accountValues: Ref<AccountValues> = ref({
+const accountValues= ref({
   firstName: store.user?.firstName,
   lastName: store.user?.lastName,
   avatar: undefined,

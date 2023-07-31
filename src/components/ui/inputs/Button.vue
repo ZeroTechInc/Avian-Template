@@ -1,21 +1,21 @@
-<script setup lang="ts">
+<script setup>
 import { twMerge } from "tailwind-merge";
 import { computed } from "vue";
 
 import Typography from "@src/components/ui/data-display/Typography.vue";
 import { RouterLink } from "vue-router";
 
-const props = defineProps<{
-  loading?: boolean;
-  variant?: string;
-  color?: string;
-  link?: boolean;
-  class?: string;
-  typography?: string;
-}>();
+const props = defineProps({
+  loading:{type:Boolean,default:undefined},
+  variant:{type:String,default:''},
+  color:{type:String,default:''},
+  link:{type:Boolean,default:undefined},
+  class:{type:String,default:''},
+  typography:{type:String,default:''},
+});
 
 // base style
-const baseClasses = `group p-3 flex justify-center items-center rounded-sm 
+const baseClasses = `group p-3 flex justify-center items-center rounded-sm
 transition-all duration-200 ease-out outline-none`;
 
 // determine the classes of the component
@@ -32,8 +32,8 @@ const variantClasses = computed(() => {
       };
     } else if (props.color === "danger") {
       return {
-        button: `group py-2 px-4 border rounded-sm border-gray-200  
-                dark:border-white dark:border-opacity-70  focus:outline-none focus:border-red-100 
+        button: `group py-2 px-4 border rounded-sm border-gray-200
+                dark:border-white dark:border-opacity-70  focus:outline-none focus:border-red-100
                 focus:bg-red-100 hover:bg-red-100 hover:border-red-100 dark:hover:border-red-400
                 dark:hover:bg-red-400 dark:focus:bg-red-400 dark:focus:border-red-400 transition-all
                 duration-200 outline-none`,
@@ -41,9 +41,9 @@ const variantClasses = computed(() => {
       };
     } else {
       return {
-        button: `bg-opacity-0 border border-gray-100 dark:border-gray-700 hover:border-indigo-300 
+        button: `bg-opacity-0 border border-gray-100 dark:border-gray-700 hover:border-indigo-300
                 hover:bg-indigo-300 dark:hover:border-indigo-400 dark:hover:bg-indigo-400
-                dark:focus:border-indigo-400 dark:focus:bg-indigo-400 active:ring 
+                dark:focus:border-indigo-400 dark:focus:bg-indigo-400 active:ring
                 active:ring-indigo-100 focus:ring focus:ring-indigo-100 focus:bg-indigo-300`,
         typography: "button-2",
       };
@@ -54,7 +54,7 @@ const variantClasses = computed(() => {
   else if (props.variant === "ghost") {
     if (props.color === "success") {
       return {
-        button: `hover:bg-green-50 hover:text-green-400 active:bg-green-100 
+        button: `hover:bg-green-50 hover:text-green-400 active:bg-green-100
                 dark:hover:bg-gray-600`,
         typography: "button-3",
       };
@@ -66,7 +66,7 @@ const variantClasses = computed(() => {
       };
     } else {
       return {
-        button: `hover:bg-indigo-50 hover:text-indigo-400 active:bg-indigo-100 
+        button: `hover:bg-indigo-50 hover:text-indigo-400 active:bg-indigo-100
                 dark:hover:bg-gray-600`,
         typography: "button-3",
       };
@@ -77,7 +77,7 @@ const variantClasses = computed(() => {
   else {
     if (props.color === "success") {
       return {
-        button: `bg-green-300 dark:bg-green-400 active:ring 
+        button: `bg-green-300 dark:bg-green-400 active:ring
                 active:ring-green-200 focus:outline-none focus:ring focus:ring-green-100`,
         typography: "button-1",
       };
