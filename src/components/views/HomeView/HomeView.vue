@@ -1,5 +1,6 @@
 <script setup>
 import { computed, onMounted } from "vue";
+import  useAuthStore  from "@src/store/auth";
 
 import useStore from "@src/store/store";
 
@@ -11,7 +12,13 @@ import Loading3 from "@src/components/states/loading-states/Loading3.vue";
 import FadeTransition from "@src/components/ui/transitions/FadeTransition.vue";
 
 const store = useStore();
+const authStore = useAuthStore();
 
+onMounted(() => {
+    if(!authStore.isAuthenticated) {
+        window.location.href = '/access/sign-in';
+    }
+});
 // the active chat component or loading component.
 const activeChatComponent = computed(() => {
   if (store.status === "loading" || store.delayLoading) {

@@ -1,14 +1,39 @@
 <script setup>
 import { ref } from "vue";
-
 import Typography from "@src/components/ui/data-display/Typography.vue";
 import Button from "@src/components/ui/inputs/Button.vue";
 import IconButton from "@src/components/ui/inputs/IconButton.vue";
 import TextInput from "@src/components/ui/inputs/TextInput.vue";
 import { EyeSlashIcon, EyeIcon } from "@heroicons/vue/24/outline";
-import { RouterLink } from "vue-router";
+import { RouterLink,useRouter } from "vue-router";
+import  useAuthStore  from "@src/store/auth";
+
+
+
+const router = useRouter();
+const authStore = useAuthStore();
+
 
 const showPassword = ref(false);
+const data = ref({email:'', password:''});
+const error = ref(null);
+const buttonText = ref('Sign in');
+const isLoading = ref(false);
+
+const submit= () => {
+
+    if(!data.value.password.length || !data.value.email.length) {
+        error.value = 'fill the input first!';
+        return;
+    }
+    error.value = null;
+    buttonText.value = 'waiting...';
+    isLoading.value = true;
+
+    authStore.isAuthenticated = true;
+    router.push({ path: '/' });
+
+}
 </script>
 
 <template>
@@ -31,8 +56,11 @@ const showPassword = ref(false);
 
       <!--form-->
       <div class="mb-6">
-        <TextInput label="Email" placeholder="Enter your email" class="mb-5" />
-        <TextInput
+        <TextInput label="Email" placeholder="Enter your email" class="mb-5" @valueChanged="(value) => data.email = value" :value="data.email"/>
+        <span v-show="error" class="text-xs text-opacity-75 font-light !text-red-600">
+          {{error}}
+     </span>
+        <TextInput @valueChanged="(value) => data.password = value" :value="data.password"
           label="Password"
           placeholder="Enter your password"
           :type="showPassword ? 'text' : 'password'"
@@ -60,7 +88,7 @@ const showPassword = ref(false);
 
       <!--local controls-->
       <div class="mb-6">
-        <Button class="w-full mb-4" link to="/">Sign in</Button>
+        <Button class="w-full mb-4" :disabled="isLoading" @click="submit">{{buttonText}}</Button>
       </div>
 
       <!--divider-->

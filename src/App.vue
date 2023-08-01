@@ -1,7 +1,8 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from "vue";
-
 import useStore from "@src/store/store";
+import  useAuthStore  from "@src/store/auth";
+
 import { fetchData } from "@src/store/defaults";
 
 import FadeTransition from "@src/components/ui/transitions/FadeTransition.vue";
@@ -28,10 +29,14 @@ import FadeTransition from "@src/components/ui/transitions/FadeTransition.vue";
 // todo add chunking.
 
 const store = useStore();
-
+const authStore = useAuthStore();
 // update localStorage with state changes
 store.$subscribe((_mutation, state) => {
   localStorage.setItem("chat", JSON.stringify(state));
+});
+
+authStore.$subscribe((_mutation, state) => {
+  localStorage.setItem("auth", JSON.stringify(state));
 });
 
 // here we load the data from the server.

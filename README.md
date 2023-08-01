@@ -25,7 +25,7 @@ Here is how to setup this template:
 <p>1. Clone the repository.</p>
 
 ```bash
-git clone https://github.com/demon-bixia/Avian-Template.git
+git clone https://github.com/ZeroTechInc/Avian-Template-Javascript
 ```
 
 <p>2. Install dependencies.</p>

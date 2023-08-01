@@ -2,19 +2,49 @@
 import Button from "@src/components/ui/inputs/Button.vue";
 import TextInput from "@src/components/ui/inputs/TextInput.vue";
 import Typography from "@src/components/ui/data-display/Typography.vue";
+import { ref } from "vue";
+
+const { modelValue } = defineProps(["modelValue"]);
+const emit = defineEmits(['active-section-change']);
+const personalData = ref(modelValue);
+const error = ref(null);
+
+const submit = () => {
+
+    if(!personalData.value.email.length) {
+        error.value = 'Email is required';
+        return;
+    }
+
+    if(!personalData.value.first_name.length) {
+        error.value = 'First name is missing';
+        return;
+    }
+    if(!personalData.value.last_name.length) {
+        error.value = 'Last name is missing';
+        return;
+    }
+    emit('active-section-change', {
+            sectionName: 'password-section',
+            animationName: 'slide-left',
+          })
+}
 </script>
 
 <template>
   <div>
     <!--form-->
     <div class="mb-5">
-      <TextInput label="Email" placeholder="Enter your email" class="mb-5" />
-      <TextInput
+      <TextInput label="Email" placeholder="Enter your email" class="mb-5" @valueChanged="(value) => personalData.email = value" :value="personalData.email"/>
+        <span v-show="error" class="text-xs text-opacity-75 font-light !text-red-600">
+          {{error}}
+     </span>
+        <TextInput @valueChanged="(value) => personalData.first_name = value" :value="personalData.first_name"
         label="First Name"
         placeholder="Enter your first name"
         class="mb-5"
       />
-      <TextInput
+      <TextInput @valueChanged="(value) => personalData.last_name = value" :value="personalData.last_name"
         label="Last Name"
         placeholder="Enter your last name"
         class="mb-5"
@@ -25,12 +55,7 @@ import Typography from "@src/components/ui/data-display/Typography.vue";
     <div class="mb-6">
       <Button
         class="w-full mb-4"
-        @click="
-          $emit('active-section-change', {
-            sectionName: 'password-section',
-            animationName: 'slide-left',
-          })
-        "
+        @click="submit"
         >Next</Button
       >
     </div>

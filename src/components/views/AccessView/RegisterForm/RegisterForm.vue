@@ -12,6 +12,14 @@ defineEmits(["activeSectionChange"]);
 // determines what form section to use.
 const activeSectionName = ref("personal-section");
 
+const personalData = ref({
+    email:'',
+    first_name:'',
+    last_name:'',
+    password:'',
+    confirm_password:'',
+});
+
 // determines what direction the slide animation should use.
 const animation = ref("slide-left");
 
@@ -26,6 +34,7 @@ const ActiveSection = computed(() => {
 
 // (event) to move between modal pages
 const changeActiveSection = (event) => {
+
   animation.value = event.animationName;
   activeSectionName.value = event.sectionName;
 };
@@ -54,6 +63,7 @@ const changeActiveSection = (event) => {
       <SlideTransition :animation="animation">
         <component
           @active-section-change="changeActiveSection"
+          v-model="personalData"
           :is="ActiveSection"
         />
       </SlideTransition>

@@ -1,20 +1,47 @@
 <script setup>
 import { ref } from "vue";
-
 import { EyeSlashIcon, EyeIcon } from "@heroicons/vue/24/outline";
 import IconButton from "@src/components/ui/inputs/IconButton.vue";
 import TextInput from "@src/components/ui/inputs/TextInput.vue";
 import Button from "@src/components/ui/inputs/Button.vue";
 
+const { modelValue } = defineProps(["modelValue"]);
+const personalData = ref(modelValue);
 const showPassword = ref(false);
 const showPasswordConfirm = ref(false);
+const error = ref(null);
+const buttonText = ref('Sign up');
+const isLoading = ref(false);
+
+const submit = () => {
+
+    if(!personalData.value.password.length) {
+        error.value = 'Password is Required!';
+        return;
+    }
+    if(personalData.value.password.length < 8) {
+        error.value = 'Password is short!';
+        return;
+    }
+
+    if(personalData.value.password != personalData.value.confirm_password) {
+        error.value = 'Password Not Matched!';
+        return;
+    }
+
+    error.value = null;
+    buttonText.value = 'waiting...';
+    isLoading.value = true;
+}
+
 </script>
 
 <template>
+
   <div>
     <div class="mb-5">
       <!--form-->
-      <TextInput
+      <TextInput @valueChanged="(value) => personalData.password = value" :value="personalData.password"
         label="Password"
         placeholder="Enter your password"
         :type="showPassword ? 'text' : 'password'"
@@ -38,8 +65,10 @@ const showPasswordConfirm = ref(false);
           </IconButton>
         </template>
       </TextInput>
-
-      <TextInput
+      <span v-show="error" class="text-xs text-opacity-75 font-light !text-red-600">
+          {{error}}
+     </span>
+      <TextInput @valueChanged="(value) => personalData.confirm_password = value" :value="personalData.confirm_password"
         label="Confirm Password"
         placeholder="Enter your password"
         :type="showPasswordConfirm ? 'text' : 'password'"
@@ -66,8 +95,12 @@ const showPasswordConfirm = ref(false);
 
     <!--controls-->
     <div class="mb-5">
-      <Button class="w-full mb-4">Sign up</Button>
+      <Button class="w-full mb-4"
+      :disabled="isLoading"
+        @click="submit"
+        >{{buttonText}}</Button>
       <Button
+        :disabled="isLoading"
         variant="outlined"
         class="w-full"
         @click="
